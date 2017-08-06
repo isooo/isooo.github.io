@@ -11,9 +11,11 @@ categories: test
 
 > 인용문구란
 
-₩₩₩
-  print "Hello world"
-₩₩₩
+
+{% highlight python %}
+print "Hello world"
+{% endhighlight %}
+
 
 {% highlight javascript %}
 console.log('print2!');
