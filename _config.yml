@@ -16,7 +16,7 @@
 title: never ending fun
 email: midnightmarching@google.com
 description: > # this means to ignore newlines until "baseurl:"
-이것저것 하고 있지만 뭘 하고 있는지 1도 모르겠습니다 :-)
+  이것저것 하고 있지만 뭘 하고 있는지 1도 모르겠습니다 :-)
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  isooo
