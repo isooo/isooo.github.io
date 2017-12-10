@@ -7,11 +7,11 @@
   repo: finalProjectInAcademy
   img: /static/assets/img/landing/likeat.jpeg
   desc: 
-  - This project is my first project.
-  - JDK 1.8 / Spring Framework / Mybatis / jQuery / Bootstrap
-  - Maven
-  - Oracle 10G
-  - tomcat 8.5.13
+        - This project is my first project.
+        - JDK 1.8 / Spring Framework / Mybatis / jQuery / Bootstrap
+        - Maven
+        - Oracle 10G
+        - tomcat 8.5.13
 
 #- name: Python
 #  i18n: cpython
