@@ -2,8 +2,11 @@
 # Add items for each banner image in the carousel
 #
 # Images are expected to be located in `static/assets/img/`.
-- src: landing/m2.jpg
+- src: landing/h1.jpg
   title: live long and prosper
+
+- src: landing/h2.jpg
+  title: never ending fun
 
 #- src: landing/header_one.jpg
 #  title: first banner image
