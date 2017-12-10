@@ -1,0 +1,32 @@
+# blog page sections
+- name: Blog
+  href: /blog/
+
+# edit following lines to custom your blog page, make sure name is the same as href but capitalized first letter(except HTML)
+- name: Java
+  href: /java/
+
+- name: Javascript
+  href: /javascript/
+
+#- name: HTML
+#  href: /html/
+
+- name: SQL
+  href: /sql/
+
+
+- name: Linux
+  href: /linux/
+
+
+- name: Algorithm
+  href: /algorithm/
+
+
+- name: Life
+  href: /life/
+
+# Don't display donation page: change donation to off at file '_config.yml'
+#- name: Donate
+#  href: /donate/
