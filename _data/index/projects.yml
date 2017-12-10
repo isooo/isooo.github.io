@@ -1,0 +1,26 @@
+# projects section data
+# If you don't have language feature(language.yml is empty), ignore "i18n" items
+# Suggest projects' img be located at '/static/assets/img/landing', and edit following img items.
+- name: Likeat
+  i18n: jalpc
+  gh_user: isooo
+  repo: finalProjectInAcademy
+  img: /static/assets/img/landing/likeat.jpeg
+  desc: This project is my first project.
+  JDK 1.8 / Spring Framework / Mybatis / jQuery / Bootstrap
+  Maven
+  Oracle 10G
+  tomcat 8.5.13
+
+#- name: Python
+#  i18n: cpython
+#  gh_user: python
+#  repo: cpython
+#  img: /static/assets/img/landing/python.png
+#  desc: This project is other's project. I use another request to get repo's information.
+#
+#- name: Google
+#  i18n: google
+#  url: https://google.com
+#  img: /static/assets/img/landing/google.png
+#  desc: This is another project.
