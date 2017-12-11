@@ -27,12 +27,12 @@ author:  # change following line to your infomation.
 #  cv: http://cv.jarrekk.com  # An online CV can be printed as PDF, leave blank if you don't have now
   # skill icons are on avatar's left and right side. Reference urls are http://fontawesome.io/ and http://fizzed.com/oss/font-mfizz
   
-#  skill_icon1:
-#    - name: icon-apache
-#    - name: fa-linux
-#  skill_icon2:
-#    - name: fa-linux
-#    - name: icon-apache
+  skill_icon1:
+    - name: icon-java-bold
+    - name: icon-spring
+  skill_icon2:
+    - name: icon-database-alt2
+    - name: fa-linux
 
   desc: "뭘 하고 있는지 1도 모르겠습니다 :-) <br/> junior developer"
   # Describe yourself.
