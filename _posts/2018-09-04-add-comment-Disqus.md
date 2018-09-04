@@ -2,7 +2,7 @@
 layout: post
 title:  "깃허브블로그에 댓글달기 기능 추가하기"
 date:   2018-09-04
-categories: [Etc]
+categories: [etc]
 tags: [disqus, Jekyll]
 ---
 
@@ -10,20 +10,20 @@ tags: [disqus, Jekyll]
 블로그 템플릿에 댓글달기 기능이 붙어있었는데  
 연동을 시켜놓지 않아 ~~마치 모델하우스처럼~~ 텅 빈 기능으로 자리잡고 있었다  
 미루고 미루다 이제서야 기능을 붙여보았다  
-  
+<br/><br/>  
   
   
 
 ##  TO-DO
 - disqus를 이용하여 깃허브블로그에 소셜 댓글 서비스 기능 붙이기  
-  
+<br/><br/>
   
   
   
 ## 진행 순서
 1. [disqus 가입하기](#ch1)
 2. [블로그에 적용하기](#ch2)  
-  
+<br/>  
   
   
   
@@ -43,7 +43,7 @@ tags: [disqus, Jekyll]
     ```
       Website URL   https://isooo.github.io
     ```   
-
+<br/>
 
   
   
@@ -67,7 +67,7 @@ tags: [disqus, Jekyll]
     ```
 
 - 이제 commit 하고 push!!  
-
+<br/><br/>
 
 
 

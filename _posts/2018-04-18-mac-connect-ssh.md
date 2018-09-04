@@ -2,7 +2,7 @@
 layout: post
 title:  "맥에서 ssh로 리눅스 서버에 접속하기"
 date:   2018-04-18
-categories: [OS]
+categories: [os]
 tags: [linux,ssh,putty]
 ---
 
