@@ -2,7 +2,7 @@
 layout: post
 title:  "window에서 동작중인 프로세스 확인"
 date:   2017-12-14 16:35:00 +0900
-categories: [os]
+categories: [Os]
 tags: [window,process,cmd]
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "리눅스에서 파일 내 문자열 검색"
 date:   2018-01-14 16:35:00 +0900
-categories: [os]
+categories: [Os]
 tags: [linux,grep,find]
 ---
 

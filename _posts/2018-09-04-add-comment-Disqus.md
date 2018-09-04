@@ -2,7 +2,7 @@
 layout: post
 title:  "깃허브블로그에 댓글달기 기능 추가하기"
 date:   2018-09-04
-categories: [etc]
+categories: [Etc]
 tags: [disqus, Jekyll]
 ---
 
@@ -71,7 +71,8 @@ tags: [disqus, Jekyll]
 
 
 
-## 참고
+## 참고자료
 - [Github Blog에 댓글(disqus) 기능 추가하기](https://devminjun.github.io/blog/addComments)
 - [지킬 블로그에 Disqus 추가하기](https://hanjungv.github.io/2017-02-03-2_ETC_AddDisqus/)  
 
+<br/>

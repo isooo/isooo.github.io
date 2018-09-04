@@ -16,7 +16,7 @@
   href: /sql/
 
 
-- name: os
+- name: Os
   href: /os/
 
 
@@ -24,7 +24,7 @@
 #  href: /algorithm/
 
 
-- name: etc
+- name: Etc
   href: /etc/
 
 # Don't display donation page: change donation to off at file '_config.yml'
