@@ -26,8 +26,9 @@ tags: [disqus, Jekyll]
 <br/>  
   
   
-  
-### 1. disqus 가입하기 <a name="ch1"></a>
+<a name="ch1"></a>
+<br/><br/>
+### 1. disqus 가입하기
 - 가입 후 로그인 > 우측 상단에 프로필 이미지 클릭 > `Settings` > 우측 상단에 톱니바퀴 클릭 > `Add Disqus To Site`  
 
 - 화면 아래 쪽에 `GET STARTED` > `I want to install Disqus on my site` 클릭  
@@ -43,11 +44,11 @@ tags: [disqus, Jekyll]
     ```
       Website URL   https://isooo.github.io
     ```   
-<br/>
-
+<a name="ch2"></a>
+<br/><br/>
   
   
-### 2. 블로그에 적용하기 <a name="ch2"></a>
+### 2. 블로그에 적용하기 
 - `_layouts/blog.html` 에 다음과 같이 `comments: true` 를 입력
     ```html
       ---
@@ -68,7 +69,6 @@ tags: [disqus, Jekyll]
 
 - 이제 commit 하고 push!!  
 <br/><br/>
-
 
 
 ## 참고자료
