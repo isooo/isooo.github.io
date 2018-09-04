@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "깃허브블로그에 댓글달기 기능 추가하기"
+title:  "깃허브블로그에 댓글 기능 추가하기"
 date:   2018-09-04
 categories: [Etc]
 tags: [disqus, Jekyll]
