@@ -4,17 +4,10 @@ $(function(){
     $("div#content").find("p").last().after(buildCodeBlocks);
 
     /* toggle/collapse preformated code blocks */
-<<<<<<< HEAD
     $("pre").bind("click", function(){
         this.className = this.className.indexOf("collapse") === -1 ?
             ( "collapse " + this.className ) : this.className.replace("collapse ", "");
     });
-=======
-    // $("pre").bind("click", function(){
-    //     this.className = this.className.indexOf("collapse") === -1 ?
-    //         ( "collapse " + this.className ) : this.className.replace("collapse ", "");
-    // });
->>>>>>> 4050c91fb54a71c9f27d498453d1f4f7a2a11f83
     
     /* apply code highlight */
     $('pre code').each( function(i, e) {

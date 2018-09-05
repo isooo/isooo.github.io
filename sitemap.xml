@@ -4,18 +4,6 @@ title : Sitemap
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<<<<<<< HEAD
-{% for post in site.posts %}
-    <url>
-        <loc>{{site.url}}{{ post.url }}</loc>
-    </url>
-{% endfor %}
-{% for page in site.pages %}
-    <url>
-        <loc>{{site.url}}{{ page.url }}</loc>
-    </url>
-{% endfor %}
-=======
 	{% for post in site.posts %}
 	<url>
 		<loc>{{ site.url }}{{ post.url }}</loc>
@@ -24,19 +12,16 @@ title : Sitemap
 		{% else %}
 		<lastmod>{{ post.lastmod | date_to_xmlschema }}</lastmod>
 		{% endif %}
-
 		{% if post.sitemap.changefreq == null %}
 		<changefreq>weekly</changefreq>
 		{% else %}
 		<changefreq>{{ post.sitemap.changefreq }}</changefreq>
 		{% endif %}
-
 		{% if post.sitemap.priority == null %}
 		<priority>0.5</priority>
 		{% else %}
 		<priority>{{ post.sitemap.priority }}</priority>
 		{% endif %}
-
 	</url>
 	{% endfor %}
 	{% for page in site.pages %}
@@ -44,5 +29,4 @@ title : Sitemap
 		<loc>{{site.url}}{{ page.url }}</loc>
 	</url>
 	{% endfor %}
->>>>>>> 4050c91fb54a71c9f27d498453d1f4f7a2a11f83
 </urlset>

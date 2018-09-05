@@ -2,8 +2,5 @@
 title: robots
 ---
 User-agent: *
-<<<<<<< HEAD
-=======
 Allow: /
->>>>>>> 4050c91fb54a71c9f27d498453d1f4f7a2a11f83
-Sitemap: <{{site.url}}/sitemap.xml>
+Sitemap: https://isooo.github.io/sitemap.xml
