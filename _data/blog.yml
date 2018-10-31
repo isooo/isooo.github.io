@@ -12,7 +12,7 @@
 #- name: HTML
 #  href: /html/
 
-- name: SQL
+- name: Sql
   href: /sql/
 
 
@@ -22,6 +22,10 @@
 
 #- name: Algorithm
 #  href: /algorithm/
+
+
+- name: Review
+  href: /review/
 
 
 - name: Etc

@@ -16,9 +16,9 @@ $(function(){
 <div class="row">
     <div class="col-lg-12 text-center">
         <div class="navy-line"></div>
-        {% assign category = page.url | remove:'/' | capitalize %}
+        {% assign category = page.url | remove:'/' | upcase %}
         {% if category == 'Html' %}
-        {% assign category = category | upcase %}
+        {% assign category = category%}
         {% endif %}
         <h1>{{ category }}</h1>
     </div>

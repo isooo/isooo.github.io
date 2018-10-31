@@ -2,7 +2,7 @@
 layout: post
 title:  "윈도우 로컬에서 지킬 서버 띄우기"
 date:   2018-10-30
-categories: [Etc]
+categories: [ETC]
 tags: [Jekyll, blog, ruby, gem]
 ---
 

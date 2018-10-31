@@ -2,7 +2,7 @@
 layout: post
 title:  "깃허브블로그에 댓글 기능 추가하기"
 date:   2018-09-04
-categories: [Etc]
+categories: [ETC]
 tags: [disqus, Jekyll]
 ---
 

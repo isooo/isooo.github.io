@@ -1,18 +1,24 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
-    detail: torpedo
-    i18n: company_a
+    detail: Torpedo
   desc:
     detail: develop ebXML Service (ebMS)
-    i18n: company_a_desc
   date:
     detail: Jun. 2017
-    i18n: company_a_date
   job:
     detail: Assistant Research Engineer
-    i18n: company_a_job
-  icon: fa-plus-square
+  icon: fa-circle
+  
+- name:
+    detail: Ajou Univ.
+  desc:
+    detail: "Double Major : e-Business, Business Administration"
+  date:
+    detail: Aug. 2013
+  job:
+    detail: 
+  icon: fa-circle-o
 
 #- name:
 #    detail: Company B
