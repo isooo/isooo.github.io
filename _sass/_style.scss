@@ -657,6 +657,11 @@ button.dim {
   box-shadow: none;
 }
 
+// .navbar-collapse {
+//   border-bottom: 3px dashed #3385ff66;
+// }
+// how can i apply only to mobile....
+
 .navbar-form-custom .form-control {
   &:focus, &:hover {
     box-shadow: none;
@@ -1394,7 +1399,8 @@ code {
 
 .ibox-content {
   color: inherit;
-  padding: 15px 20px 20px;
+  // padding: 15px 20px 20px;
+  padding: 5px;
   border-width: 1px 0;
   clear: both;
 }
@@ -1894,7 +1900,8 @@ ul.clear-list:first-child {
 }
 
 .article .ibox-content {
-  padding: 40px;
+//  padding: 40px;
+  padding: 5px;
 }
 
 .vote-item {
@@ -1921,7 +1928,7 @@ ul.clear-list:first-child {
 }
 
 .social-comment .social-comment, .vote-info, .vote-title {
-  margin-left: 45px;
+  margin-left: 5px;
 }
 
 .social-avatar {
@@ -2417,7 +2424,8 @@ body {
     }
   }
   .navbar-nav > li > a {
-    padding-top: 25px;
+//    padding-top: 25px;
+    padding-top: 10px;
     border-top: 6px solid transparent;
   }
   .navbar-default {
@@ -2425,7 +2433,8 @@ body {
       .active > a {
         background: 0 0;
         color: #fff;
-        border-top: 6px solid #3385FF;
+//        border-top: 6px solid #3385FF;
+        background-color: #3385ff66;
         &:hover {
           background: 0 0;
           color: #fff;
