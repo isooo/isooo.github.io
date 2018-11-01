@@ -2823,5 +2823,29 @@ body {
         border: none;
       }
     }
+    
+
   }
+}
+
+
+.post-title-link {
+  color: inherit;
+  &.active, &:active, &:focus, &:hover {
+    color: #3385FF;
+    text-decoration: none;
+  }
+  &.active[disabled] {
+    color: #cacaca;
+  }
+  &[disabled] {
+    color: #cacaca;
+    &:active, &:focus, &:hover {
+      color: #cacaca;
+    }
+  }
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 5px;
+  margin-bottom: 2px;
 }
