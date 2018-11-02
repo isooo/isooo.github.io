@@ -1374,7 +1374,7 @@ code {
 
 .ibox {
   clear: both;
-  margin-bottom: 25px;
+//  margin-bottom: 25px;
   margin-top: 0;
   padding: 0;
   &.collapsed .ibox-content {
@@ -1955,7 +1955,7 @@ ul.clear-list:first-child {
 }
 
 .vote-item {
-  padding: 20px 25px;
+  padding: 10px 15px;
   background: #fff;
   &:last-child {
     border-bottom: 1px solid #e7eaec;
@@ -2844,8 +2844,19 @@ body {
       color: #cacaca;
     }
   }
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
   margin-top: 5px;
   margin-bottom: 2px;
+}
+
+
+.post-time {
+  font-size: 15px;
+  width: auto;
+  font-weight: 300;
+  margin: 0;
+  padding: .25em 0;
+  color: #7a7a7a;
+  font-style: italic;
 }

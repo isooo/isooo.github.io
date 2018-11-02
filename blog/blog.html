@@ -22,17 +22,19 @@ permalink: /blog/
                     <div class="col-md-10">
                         <div class="vote-actions">
                         </div>
-                        <a href="{{ post.url | prepend: site.baseurl }}" class="btn-link vote-title vote-title-btn-link">
+                        <a href="{{ post.url | prepend: site.baseurl }}" class="post-title-link">
                             {{ post.title }}
                         </a>
-                        <div class="vote-info">
+                        <!-- <div class="vote-info"> -->
                         <!-- {% if site.disqus %}
                             <i class="fa fa-comments-o"> </i> <a>Comments (<span class="disqus-comment-count" data-disqus-url="{{ site.url }}{{ post.url }}">0</span>)</a>
                         {% endif %} -->
                             <!-- <i class="fa fa-clock-o"></i>  -->
-                            <a>{{ post.date | date: "%-d %b %Y" }}</a>
+                            <span class="post-time">
+                              {{ post.date | date: "%-d %b %Y" }}
+                            </span>
                             <!-- <i class="fa fa-user"></i> <a>{{ site.author.name }}</a> -->
-                        </div>
+                        <!-- </div> -->
                     </div>
                     <div class="col-md-2 ">
                         <div class="vote-icon">
