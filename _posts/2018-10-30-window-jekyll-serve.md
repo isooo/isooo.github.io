@@ -14,7 +14,7 @@ tags: [Jekyll, blog, ruby, gem]
 
 1. [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/){: target="_blank" } 에서
   `WITHOUT DEVKIT [Ruby 2.3.3 (x64)]` 과 `DEVELOPMENT KIT (OLD) For use with Ruby 2.0 to 2.3 (x64 - 64bits only)` 을 다운로드
-<br/><br/>
+<br/><
 
 2. 다운로드받은 `Ruby 2.3.3 (x64)` 를 더블클릭하여 설치
   - 설치시, 체크박스 중 `Add Ruby executables to your PATH`를 체크하면, 환경변수까지 자동으로 세팅해준다
