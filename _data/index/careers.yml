@@ -5,11 +5,11 @@
   desc:
     detail: develop ebXML Service (ebMS)
   date:
-    detail: Jun. 2017
+    detail: Jun. 2017 ~ Nov. 2018
   job:
     detail: Assistant Research Engineer
   icon: fa-circle
-  
+
 - name:
     detail: Ajou Univ.
   desc:
@@ -17,7 +17,7 @@
   date:
     detail: Aug. 2013
   job:
-    detail: 
+    detail:
   icon: fa-circle-o
 
 #- name:
