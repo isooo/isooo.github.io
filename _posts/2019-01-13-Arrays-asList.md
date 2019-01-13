@@ -3,7 +3,7 @@ layout: post
 title:  "ArrayList vs ArrayList"
 date:   2019-01-13
 categories: [JAVA]
-tags: [java, ArrayList. Arrays, asList]
+tags: [java, ArrayList, Arrays, asList]
 ---
 
 # ArrayList vs ArrayList
@@ -52,7 +52,7 @@ tags: [java, ArrayList. Arrays, asList]
 ### ++ 또다른 궁금증  
 `AbstractList`가 `implements List`를 하고 있음에도 불구하고,  
 왜 `java.util.ArrayList`에서도 `implements List`하고 있을까?..  
-<small>*~~이것도 왠지 왜냐면 Java is just like that...?~~*</small>  
+<small>*~~이것도 왠지 Java is just like that...?~~*</small>  
 ~~~java
 public abstract class AbstractList<E> extends AbstractCollection<E> implements List<E>
 ~~~  
