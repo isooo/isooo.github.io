@@ -38,5 +38,8 @@ System.out.println(b1.subtract(b2));
 ~~~java
 System.out.println(b1.min(b2));     // 1.1
 System.out.println(b1.max(b2));     // 2.0
+System.out.println(b1.divide(b2, RoundingMode.FLOOR));      // 1.8
+System.out.println(b1.divide(b2, 4, RoundingMode.FLOOR));   // 1.8181
 System.out.println(b1.pow(3));      // 8.000
+
 ~~~  
