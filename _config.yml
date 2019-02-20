@@ -1,6 +1,6 @@
 title: isooo
 description: isoo's blog, use Jekyll and github pages.
-keywords: 
+keywords:
 url: https://isooo.github.io
 # url: http://127.0.0.1:4000
 img_path: /Jalpc/static/assets/img/blog  # url should be '/homepage/static/assets/img/blog' as before
@@ -8,9 +8,9 @@ img_path: /Jalpc/static/assets/img/blog  # url should be '/homepage/static/asset
 # author -- index page "about me" section
 author:  # change following line to your infomation.
   name: isoo  # Be used at blog posts' author.
-  first_name: 
+  first_name:
 #            Hub  # Be used at index page about me section.
-  last_name: 
+  last_name:
 #            Git  # Be used at index page about me section.
   avatar: /static/assets/img/landing/finn.png  # upload your avatar at directory and edit it.
   github_username: isooo  # Leave blank if you don't have now
@@ -21,7 +21,7 @@ author:  # change following line to your infomation.
   email: midnightmarching@gmail.com  # Leave blank if you don't have now
 #  cv: http://cv.jarrekk.com  # An online CV can be printed as PDF, leave blank if you don't have now
   # skill icons are on avatar's left and right side. Reference urls are http://fontawesome.io/ and http://fizzed.com/oss/font-mfizz
-  
+
   skill_icon1:
     - name: icon-java-bold
     - name: icon-spring
@@ -29,7 +29,7 @@ author:  # change following line to your infomation.
     - name: icon-database-alt2
     - name: fa-linux
 
-  desc: "뭘 하고 있는지 1도 모르겠습니다 :-) <br/> junior developer"
+  desc: "호기심이 많습니다 :-) <br/> junior developer"
 
 # comment
 disqus: "isooo"
