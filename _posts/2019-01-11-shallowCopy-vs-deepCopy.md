@@ -7,8 +7,7 @@ tags: [java, 얕은복사, 깊은복사]
 ---
 
 # 얕은 복사(Shallow Copy)와 깊은 복사(Deep Copy)
-얕은 복사는 참조 복사(call by reference)로,  
-깊은 복사는 값 복사(call by value)로 볼 수 있다.
+
 
 ---
 
