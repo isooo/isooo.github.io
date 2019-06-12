@@ -3,11 +3,14 @@
   href: /blog/
 
 # edit following lines to custom your blog page, make sure name is the same as href but capitalized first letter(except HTML)
+- name: Diary
+  href: /diary/
+
 - name: Java
   href: /java/
 
-- name: Javascript
-  href: /javascript/
+# - name: Javascript
+#   href: /javascript/
 
 #- name: HTML
 #  href: /html/
