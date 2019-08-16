@@ -1,21 +1,32 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
+    detail: LINE Financial Plus
+  desc:
+    detail: Server Dev Internship
+  date:
+    detail: Jun. 2019 - Aug. 2019
+  job:
+    detail: Intern
+  icon: fa-circle-o
+
+- name:
     detail: Torpedo
   desc:
     detail: develop ebXML Service (ebMS)
   date:
-    detail: Jun. 2017 ~ Nov. 2018
+    detail: Jun. 2017 - Nov. 2018
   job:
     detail: Assistant Research Engineer
-  icon: fa-circle
+  icon: fa-circle-o
+
 
 - name:
     detail: Ajou Univ.
   desc:
     detail: "Double Major : e-Business, Business Administration"
   date:
-    detail: Aug. 2013
+    detail: Mar. 2008 - Aug. 2013
   job:
     detail:
   icon: fa-circle-o
