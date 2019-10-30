@@ -1128,19 +1128,19 @@ label.error {
   margin-left: 60px;
   background: #fff;
   border-radius: .25em;
-  padding: 1em;
+  // padding: 1em;
   &:after {
     content: "";
     display: table;
     clear: both;
   }
   h2 {
-    font-weight: 400;
-    margin-top: 4px;
+    // font-weight: 400;
+    // margin-top: 4px;
   }
   p {
-    margin: 1em 0;
-    line-height: 1.6;
+    // margin: 1em 0;
+    // line-height: 1.6;
   }
   .vertical-date {
     float: left;
@@ -1227,7 +1227,7 @@ body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #2f4050;
   // font-size: 13px;
-  color: #676a6c;
+  color: #283643;
   height: 100%;
 }
 
@@ -1857,20 +1857,20 @@ ul.clear-list:first-child {
 
 .project-title a {
   font-size: 14px;
-  color: #676a6c;
+  color: #283643;
   font-weight: 600;
 }
 
 .project-files li a {
   font-size: 11px;
-  color: #676a6c;
+  color: #283643;
   margin-left: 10px;
   line-height: 22px;
 }
 
-.article h1, .blog h2 {
-  font-weight: 700;
-}
+// .article h1, .blog h2 {
+//   font-weight: 700;
+// }
 
 .contact-type {
   width: 20px;
@@ -1886,7 +1886,7 @@ ul.clear-list:first-child {
 .article {
   h1 {
     // font-size: 48px;
-    color: #2F4050;
+    color: #1b232a;
   }
   p {
     // font-size: 15px;
@@ -2015,7 +2015,7 @@ body {
     display: none;
   }
   &.landing-page {
-    color: #676a6c;
+    color: #454546;
     font-family: 'Open Sans', helvetica, arial, sans-serif;
     background-color: #fff;
   }
@@ -2366,7 +2366,7 @@ body {
     color: #3385FF;
   }
   p.text-color {
-    color: #676a6c;
+    color: #283643;
   }
   a.navy-link {
     color: #3385FF;
