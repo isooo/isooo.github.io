@@ -6,8 +6,8 @@
 - name: Diary
   href: /diary/
 
-- name: Java
-  href: /java/
+# - name: Java
+#   href: /java/
 
 # - name: Javascript
 #   href: /javascript/
@@ -15,12 +15,12 @@
 #- name: HTML
 #  href: /html/
 
-- name: Sql
-  href: /sql/
+# - name: Sql
+#   href: /sql/
 
 
-- name: Os
-  href: /os/
+# - name: Os
+#   href: /os/
 
 
 #- name: Algorithm

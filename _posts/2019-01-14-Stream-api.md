@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Stream API"
+title:  "[Java] Stream API"
 date:   2019-01-14
-categories: [JAVA]
+categories: [ETC]
 tags: [java, java8, Stream, Stream API]
 ---
 

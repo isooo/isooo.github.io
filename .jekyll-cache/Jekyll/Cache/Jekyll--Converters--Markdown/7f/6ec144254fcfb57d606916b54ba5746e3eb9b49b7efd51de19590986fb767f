@@ -1,0 +1,352 @@
+I"��<h1 id="stream">Stream</h1>
+<p>자바 8부터 추가되었으며 다량의 데이터 처리 작업을 도와주는 기능이다.</p>
+
+<p><br /></p>
+<h1 id="스트림-api의-구조">스트림 API의 구조</h1>
+<p><strong>스트림 생성 -&gt; 중간 연산(intermediate operation) -&gt; 종단 연산(terminal operation)</strong></p>
+<ul>
+  <li><strong>중간 연산</strong>은 스트림을 어떠한 방식으로 변환(transform)한다.
+    <ul>
+      <li>각 원소에 함수를 적용하거나 특정 조건을 만족 못하는 원소를 걸러낼 수 있다.</li>
+    </ul>
+  </li>
+  <li><strong>종단 연산</strong>은 마지막 중간 연산이 내놓은 스트림에 최후의 연산을 가한다.
+    <ul>
+      <li>원소를 정렬해 컬렉션에 담거나, 특정 원소 하나를 선택하거나, 모든 원소를 출력할 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">orders</span><span class="o">.</span><span class="na">stream</span><span class="o">().</span><span class="na">filter</span><span class="o">(</span><span class="n">o</span> <span class="o">-&gt;</span> <span class="n">o</span><span class="o">.</span><span class="na">getPrice</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="o">).</span><span class="na">count</span><span class="o">();</span>
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h1 id="스트림-생성">스트림 생성</h1>
+<p>배열이나 컬렉션을 이용하여 스트림을 만들 수도 있고, 그 외 특정 메서드를 이용하여 생성할 수도 있다.<br />
+<br /></p>
+
+<h3 id="arrays">Arrays</h3>
+<ul>
+  <li>stream(*)</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]{</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">};</span>
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream1</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream2</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>    <span class="c1">// 1~2 요소 [b, c]</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="collection">Collection</h3>
+<ul>
+  <li>stream(), parallelStream()</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">collection</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="na">stream</span><span class="o">();</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="stream-1">Stream</h3>
+<ul>
+  <li>builder(), of(*), generate(…), iterate(…)</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">builderStream</span> <span class="o">=</span> <span class="nc">Stream</span><span class="o">.&lt;</span><span class="nc">String</span><span class="o">&gt;</span><span class="n">builder</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"a"</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"b"</span><span class="o">).</span><span class="na">add</span><span class="o">(</span><span class="s">"c"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">build</span><span class="o">();</span> <span class="c1">// [a, b, c]</span>
+
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">ofStream</span> <span class="o">=</span> <span class="nc">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">);</span>
+
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">iteratedStream</span> <span class="o">=</span>
+        <span class="nc">Stream</span><span class="o">.</span><span class="na">iterate</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">2</span><span class="o">).</span><span class="na">limit</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span> <span class="c1">// [10, 12, 14, 16, 18]</span>
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h1 id="중간-연산">중간 연산</h1>
+<p>중간 작업은 스트림을 리턴하기 때문에 여러 작업을 이어 붙여서 작성할 수 있다.<br />
+<br /></p>
+
+<h3 id="filter">filter</h3>
+<ul>
+  <li><code class="highlighter-rouge">Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</code></li>
+  <li>스트림 내 요소들을 하나씩 평가하여, <strong>조건에 만족하는 요소</strong>를 제공하는 새로운 스트림을 생성한다.</li>
+  <li>인자로는 boolean을 리턴하는 함수형 인터페이스 평가식이 들어간다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">o</span> <span class="o">-&gt;</span> <span class="n">o</span><span class="o">.</span><span class="na">getPrice</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="o">);</span>
+<span class="c1">// o로 스트림 요소를 받고, 각 요소의 가격이 100 이상인 스트림이 리턴된다</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="map">map</h3>
+<ul>
+  <li><code class="highlighter-rouge">Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper)</code></li>
+  <li>입력 T타입 요소를, R타입 요소로 <strong>변환</strong>하는 스트림을 생성한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="mi">0</span><span class="o">));</span>
+<span class="c1">// [apple, banana, cherry] ==&gt; [a, b, c]</span>
+
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="n">orders</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">o</span> <span class="o">-&gt;</span> <span class="n">o</span><span class="o">.</span><span class="na">getPrice</span><span class="o">());</span>
+<span class="c1">// Order객체의 가격을 꺼낼 수도 있다(Order를 price로 맵핑) ==&gt; [100, 90, 80]</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="flatmap">flatMap</h3>
+<ul>
+  <li><code class="highlighter-rouge">Stream&lt;R&gt; flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper)</code></li>
+  <li>T 타입 요소를 1:N의 R타입 요소로 변환한 스트림을 생성한다.</li>
+  <li>중첩 구조를 한 단계 제거하고 <strong>단일 컬렉션</strong>으로 만들어준다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span><span class="o">[][]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[][]{</span>
+        <span class="o">{</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">},</span> <span class="o">{</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">},</span> <span class="o">{</span><span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">}</span>
+<span class="o">};</span>
+<span class="nc">Stream</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">stream</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">strArr</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">flatMap</span><span class="o">(</span><span class="n">arr</span> <span class="o">-&gt;</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">stream</span><span class="o">(</span><span class="n">arr</span><span class="o">));</span>
+<span class="c1">// [a, b, a, c, b, c]    </span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="sorted">sorted</h3>
+<ul>
+  <li><code class="highlighter-rouge">Stream&lt;T&gt; sorted()</code></li>
+  <li><code class="highlighter-rouge">Stream&lt;T&gt; sorted(Comparator&lt;? super T&gt; comparator)</code></li>
+  <li>스트림의 요소를 <strong>정렬</strong>한 스트림을 생성한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 인자 없는 sorted</span>
+<span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">sorted</span><span class="o">();</span>
+<span class="c1">// 1, 2, 3, 4, 5</span>
+
+
+<span class="c1">// 인자 있는 sorted</span>
+<span class="nc">Stream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">"banana"</span><span class="o">,</span> <span class="s">"apple"</span><span class="o">,</span> <span class="s">"cherry"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">sorted</span><span class="o">(</span><span class="nc">Comparator</span><span class="o">.</span><span class="na">reverseOrder</span><span class="o">());</span>
+<span class="c1">// cherry, banana, apple</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="skip">skip</h3>
+<ul>
+  <li>Stream<T> skip(long n)</T></li>
+  <li>처음 n개의 <strong>요소를 제외</strong>하는 스트림을 생성한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">skip</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+<span class="c1">// 5, 3</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="peek">peek</h3>
+<ul>
+  <li><code class="highlighter-rouge">Stream&lt;T&gt; peek(Consumer&lt;? super T&gt; action)</code></li>
+  <li>스트림 내 요소들 각각을 대상으로 특정 <strong>연산을 수행</strong>한다.</li>
+  <li>특정 작업을 수행할 뿐 결과에는 영향을 미치지 않나, 작업을 처리하는 중간에 상태를 확인해볼 때 사용할 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">peek</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">sum</span><span class="o">();</span>
+<span class="c1">// 1 2 3 4 5 가 출력되며, 15라는 int가 리턴된 상태</span>
+<span class="c1">// sum()은 종단 연산에 해당한다.</span>
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h1 id="종단-연산">종단 연산</h1>
+<p>가공한 스트림을 가지고 내가 사용할 결과값으로 만들어 내는 단게이다. (스트림을 끝내는 단계)
+<br /></p>
+
+<h3 id="count-sum">count(), sum()</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Long</span> <span class="n">count</span> <span class="o">=</span> <span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span><span class="na">count</span><span class="o">();</span>   <span class="c1">// 5</span>
+<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span><span class="na">sum</span><span class="o">();</span>        <span class="c1">// 15</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="min-max-average">min(), max(), average()</h3>
+<ul>
+  <li><code class="highlighter-rouge">Optional&lt;T&gt; min(Comparator&lt;? super T&gt; comparator)</code></li>
+  <li><code class="highlighter-rouge">Optional&lt;T&gt; max(Comparator&lt;? super T&gt; comparator)</code></li>
+  <li><code class="highlighter-rouge">OptionalDouble average()</code></li>
+  <li>만약 스트림이 비어있는 경우, <code class="highlighter-rouge">count()</code>나 <code class="highlighter-rouge">sum</code>은 0을 출력하면 되지만,<br />
+최소, 최대, 평균의 경우에는 표현할 수 없기 때문에 <code class="highlighter-rouge">Optional</code>을 이용하여 리턴한다</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">OptionalInt</span> <span class="n">optionalInt</span> <span class="o">=</span> <span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">).</span><span class="na">min</span><span class="o">();</span>
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">OptionalInt, OptionalLong, OptionalDouble</code>은 <code class="highlighter-rouge">getAsInt, getAsLong, getAsDouble</code> 등을 포함한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">).</span><span class="na">min</span><span class="o">().</span><span class="na">getAsInt</span><span class="o">();</span>
+<span class="nc">Long</span> <span class="n">max</span> <span class="o">=</span> <span class="nc">LongStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">).</span><span class="na">max</span><span class="o">().</span><span class="na">getAsLong</span><span class="o">();</span>
+<span class="nc">Double</span> <span class="n">avg</span> <span class="o">=</span> <span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">).</span><span class="na">average</span><span class="o">().</span><span class="na">getAsDouble</span><span class="o">();</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="reduce">reduce()</h3>
+<ul>
+  <li>최종적으로 어떠한 결과를 만들어내기 위해 사용하는 메소드이다.</li>
+  <li><code class="highlighter-rouge">Optional&lt;T&gt; reduce(BinaryOperator&lt;T&gt; accumulator)</code>
+    <ul>
+      <li><strong>accumulator</strong>
+        <ul>
+          <li>각 요소를 처리하는 계산 로직. 각 요소가 올 때마다 중간 결과를 생성하는 로직</li>
+          <li>같은 타입의 인자 두 개를 받아, 같은 타입의 결과를 반환하는 함수형 인터페이스
+            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">reduce</span><span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">y</span> <span class="o">?</span> <span class="n">x</span> <span class="o">:</span> <span class="n">y</span><span class="o">);</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">T reduce(T identity, BinaryOperator&lt;T&gt; accumulator)</code>
+    <ul>
+      <li><strong>identity</strong>
+        <ul>
+          <li>계산을 위한 초기값. 스트림이 비어서 계산할 내용이 없더라도 이 값은 리턴
+            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Integer</span> <span class="n">multi</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="o">);</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">&lt;U&gt; U reduce(U identity, </code><br />
+<code class="highlighter-rouge">BiFunction&lt;U, ? super T, U&gt; accumulator, </code><br />
+<code class="highlighter-rouge">BinaryOperator&lt;U&gt; combiner)</code>
+    <ul>
+      <li><strong>combiner</strong>
+        <ul>
+          <li>병렬(parallel)스트림에서 나눠 계산한 결과를 하나로 합치는 로직
+            <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Double</span> <span class="n">reduce</span> <span class="o">=</span> <span class="n">numbers</span><span class="o">.</span><span class="na">parallelStream</span><span class="o">()</span>
+  <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span>
+          <span class="o">(</span><span class="n">val1</span><span class="o">,</span> <span class="n">val2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="nc">Double</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span> <span class="o">/</span> <span class="mi">10</span><span class="o">),</span>
+          <span class="o">(</span><span class="n">val1</span><span class="o">,</span> <span class="n">val2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">val1</span> <span class="o">+</span> <span class="n">val2</span> <span class="o">);</span>
+</code></pre></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 인자 하나(accumulator) 예시</span>
+<span class="c1">// 1 + 2</span>
+<span class="c1">// (1 + 2) + 3</span>
+<span class="c1">// ((1 + 2) + 3) + 4</span>
+<span class="c1">// ... 최총값 15</span>
+<span class="nc">OptionalInt</span> <span class="n">reduced</span> <span class="o">=</span>
+        <span class="nc">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">6</span><span class="o">)</span> <span class="c1">// [1, 2, 3, 4, 5]</span>
+                <span class="o">.</span><span class="na">reduce</span><span class="o">((</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">));</span>
+
+<span class="c1">// 인자 둘(identity) 예시</span>
+<span class="c1">// -10 + 1</span>
+<span class="c1">// (-10 + 1) + 2</span>
+<span class="c1">// ... 최종값 5</span>
+<span class="kt">int</span> <span class="n">reduced</span> <span class="o">=</span>
+        <span class="nc">IntStream</span><span class="o">.</span><span class="na">range</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">6</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">reduce</span><span class="o">(-</span><span class="mi">10</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">));</span>
+
+<span class="c1">// 인자 셋(combiner) 예시</span>
+<span class="c1">// (a + b)작업과 병렬로 (a * b)작업이 일어남</span>
+<span class="c1">// 1 + 30, 1 + 10, 1 + 40</span>
+<span class="c1">// (1 + 30) * (1 + 40), 1 + 50,</span>
+<span class="c1">// 1 + 20, ((1 + 30) * (1 + 40)) * (1 + 50)</span>
+<span class="c1">// ... 최종적값 14973651</span>
+<span class="nc">Integer</span> <span class="n">reducedParallel</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">50</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">parallelStream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">);</span>
+<span class="c1">// 로그확인용</span>
+<span class="nc">Integer</span> <span class="n">reducedParallelTest</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">40</span><span class="o">,</span> <span class="mi">50</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">parallelStream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">reduce</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">a</span> <span class="o">+</span> <span class="s">" + "</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+                    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">;</span>
+                <span class="o">},</span>
+                <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\t\t"</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="s">" * "</span> <span class="o">+</span> <span class="n">b</span><span class="o">);</span>
+                    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="o">;</span>
+                <span class="o">});</span>                
+
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="collect">collect</h3>
+<ul>
+  <li>스트림의 요소를 모으고자 할 때 사용한다.</li>
+</ul>
+
+<blockquote>
+  <p><small> <em><code class="highlighter-rouge">&lt;R, A&gt; R collect(Collector&lt;? super T, A, R&gt; collector)</code></em><br />
+  <em>T: 입력 타입, A: 결과 축적용 타입, R: 최종 타입</em>  </small></p>
+</blockquote>
+
+<ul>
+  <li><small>위의 방법을 사용할 수도 있지만,</small><br />
+java에서 제공하는 <strong>Collectors 클래스</strong>를 이용하여 좀 더 간단하게 처리할 수 있다.</li>
+  <li><code class="highlighter-rouge">Collectors.toList()</code>, <code class="highlighter-rouge">Collectors.toSet()</code>, <code class="highlighter-rouge">Collectors.toMap()</code></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">skip</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>    <span class="c1">// 3, 4, 5</span>
+        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>        
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">Collectors.joining()</code>
+    <ul>
+      <li>스트림에서 작업한 결과를 하나의 문자열로 모을 수 있다.</li>
+    </ul>
+  </li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"a"</span><span class="o">,</span> <span class="s">"b"</span><span class="o">,</span> <span class="s">"c"</span><span class="o">,</span><span class="s">"d"</span><span class="o">,</span> <span class="s">"e"</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">skip</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">joining</span><span class="o">());</span>
+<span class="c1">// cde</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="foreach">forEach</h3>
+<ul>
+  <li><code class="highlighter-rouge">void forEach(Consumer&lt;? super T&gt; con)</code></li>
+  <li>인수로 전달된 함수에 T타입의 요소를 하나씩 전달하여 처리한다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">IntStream</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">sorted</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">forEach</span><span class="o">(</span><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">::</span><span class="n">println</span><span class="o">);</span>
+<span class="c1">// 1 2 3 4 5        </span>
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h2 id="정리">정리</h2>
+<ul>
+  <li>각 단계별 메소드는 위 내용 외에도 많이 있으니 찾아보고 필요에 따라 사용하면 될듯하다.</li>
+  <li>stream을 사용하면 코드가 단순해 보인다는 장점이 있지만, 원치 않은 결과를 받을 수도 있으므로 잘 사용해야할 듯 하다.</li>
+</ul>
+
+<h2><br /><br /><br /><br /></h2>
+<h3 id="참고">참고</h3>
+<ul>
+  <li><a href="http://www.insightbook.co.kr/13027">이펙티브 자바 3판(Effective Java 3/E)</a></li>
+  <li><a href="https://futurecreator.github.io/2018/08/26/java-8-streams/">https://futurecreator.github.io/2018/08/26/java-8-streams/</a></li>
+  <li><a href="https://www.slideshare.net/madvirus/8-api">자바8 스트림 API 소개 - beom kyun choi</a></li>
+  <li><a href="https://www.slideshare.net/arawnkr/api-42494051">씹고 뜯고 맛보고 즐기는 스트림 API - Arawn Park</a></li>
+  <li><a href="http://hamait.tistory.com/547">자바8 Streams API 를 다룰때 실수하기 쉬운것 10가지</a></li>
+</ul>
+:ET

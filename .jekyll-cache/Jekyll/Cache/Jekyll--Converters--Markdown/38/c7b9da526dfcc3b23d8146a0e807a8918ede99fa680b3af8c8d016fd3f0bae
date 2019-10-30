@@ -1,0 +1,37 @@
+I"�<ul>
+  <li>
+    <p>맥에서 터미널로 ssh 접속하기</p>
+
+    <blockquote>
+      <p><code class="highlighter-rouge">ssh 계정ID@호스트혹은IPaddress -p 포트번호</code></p>
+    </blockquote>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      isoo@isoo-MacBook-Air:~ » ssh isoo@ ▩▩▩▩▩▩▩ <span class="nt">-p</span> ▩▩▩▩▩▩▩
+      The authenticity of host ▩▩▩▩▩▩▩▩ cannot be established.
+      ECDSA key fingerprint is ▩▩▩▩▩▩▩▩.
+      Are you sure you want to <span class="k">continue </span>connecting <span class="o">(</span><span class="nb">yes</span>/no<span class="o">)</span>? <span class="nb">yes
+      </span>Warning: Permanently added ▩▩▩▩▩▩▩▩ <span class="o">(</span>ECDSA<span class="o">)</span> to the list of known hosts.
+      isoo@ ▩▩▩▩▩▩▩s password:
+      Welcome to Ubuntu 12.04.1 LTS <span class="o">(</span>GNU/Linux 3.2.0-29-generic x86_64<span class="o">)</span>
+
+       <span class="k">*</span> Documentation:  https://help.ubuntu.com/
+
+       System information disabled due to load higher than 8.0
+
+      New release <span class="s1">'14.04.1 LTS'</span> available.
+      Run <span class="s1">'do-release-upgrade'</span> to upgrade to it.
+
+      <span class="k">***</span> System restart required <span class="k">***</span>
+      Last login: ▩▩▩▩▩▩▩▩▩▩
+      isoo@ ▩▩▩▩▩▩▩:~<span class="nv">$ </span><span class="nb">ls</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>리눅스 접속 끊고 터미널로 돌아가기</p>
+
+    <ul>
+      <li>ctrl + d</li>
+    </ul>
+  </li>
+</ul>
+:ET

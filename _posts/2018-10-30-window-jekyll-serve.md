@@ -1,20 +1,20 @@
 ---
 layout: post
-title:  "윈도우 로컬에서 지킬 서버 띄우기"
+title:  "[OS] 윈도우 로컬에서 지킬 서버 띄우기"
 date:   2018-10-30
 categories: [ETC]
-tags: [Jekyll, blog, ruby, gem]
+tags: [os, Jekyll, blog, ruby, gem]
 ---
 
 윈도우 환경에서 지킬 서버를 띄워, 블로그를 편집하고 싶었다.
 포스팅 하나를 하려할 때마다 commit을 하는 것은 ~~지저분하기 그지없고~~ 비효율적이라
 로컬에서 수정하고 완성본이 되었을 때 commit-push 하기위하여 본 작업을 하게 되었다.
 
-#  　　
+# 윈도우 로컬에서 Jekyll 서버 띄우기 　　
 
 1. [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/){: target="_blank" } 에서
   `WITHOUT DEVKIT [Ruby 2.3.3 (x64)]` 과 `DEVELOPMENT KIT (OLD) For use with Ruby 2.0 to 2.3 (x64 - 64bits only)` 을 다운로드
-<br/><
+<br/><br/>
 
 2. 다운로드받은 `Ruby 2.3.3 (x64)` 를 더블클릭하여 설치
   - 설치시, 체크박스 중 `Add Ruby executables to your PATH`를 체크하면, 환경변수까지 자동으로 세팅해준다

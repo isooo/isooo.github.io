@@ -1,0 +1,151 @@
+I"�:<h1 id="comparable과-comparator">Comparable과 Comparator</h1>
+<p>자바에서 오브젝트를 정렬할 때 <code class="highlighter-rouge">Comparable</code>과 <code class="highlighter-rouge">Comparator</code>를 구현해여 정렬할 수 있다.</p>
+
+<blockquote>
+  <p><code class="highlighter-rouge">Comparable</code>는 <strong>클래스 내에</strong> 정렬 메소드를 구현할 때 사용한다<br />
+<code class="highlighter-rouge">Comparator</code>는 <strong>클래스를 호출하는 쪽에서</strong> 정렬 메소드를 사용할 때 사용한다</p>
+</blockquote>
+
+<p>말로 설명하기엔 무리가 있으니, 각각 코드를 통해 알아보자 :)</p>
+
+<p><br /></p>
+
+<h1 id="comparable">Comparable</h1>
+
+<hr />
+
+<ul>
+  <li>다음과 같은 Student클래스가 있다</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">id</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="kt">int</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"{"</span> <span class="o">+</span>
+                <span class="s">"id="</span> <span class="o">+</span> <span class="n">id</span> <span class="o">+</span>
+                <span class="s">", name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+                <span class="sc">'}'</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<ul>
+  <li>이 <code class="highlighter-rouge">Student</code>클래스의 오브젝트들을 <strong>id를 기준으로 오름차순으로 정렬</strong> 하는 일이 많다면,<br />
+아래와 같이 <code class="highlighter-rouge">Comparable</code>인터페이스를 구현하여 <code class="highlighter-rouge">compareTo()</code>를 오버라이드 해주면 된다.<br />
+<em>== 해당 기준으로 정렬해야 하는 경우가 많다면 아예 클래스 내부에다 메소드를 구현해놓고 편리하게 사용할 수 있다!</em></li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Comparable 인터페이스 구현</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span>
+        <span class="kd">implements</span> <span class="nc">Comparable</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="o">...</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compareTo</span><span class="o">(</span><span class="nc">Student</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="na">id</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<ul>
+  <li>이제 <code class="highlighter-rouge">Student</code>클래스를 요소로 가진 리스트를 생성 후, <code class="highlighter-rouge">Collections.sort()</code>를 이용하여 정렬시켜 보자.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="kd">final</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">list</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="s">"banana"</span><span class="o">));</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="s">"dragonFruit"</span><span class="o">));</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="s">"cherry"</span><span class="o">));</span>
+    <span class="n">list</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="s">"apple"</span><span class="o">));</span>
+
+    <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>     
+    <span class="c1">// 파라미터로는 정렬하고자 하는 리스트만 넘기면 된다</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<ul>
+  <li>결과</li>
+</ul>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">[{id=1, name='apple'}, {id=2, name='dragonFruit'}, {id=3, name='banana'}, {id=4, name='cherry'}]
+</span></code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h1 id="comparator">Comparator</h1>
+<hr />
+<ul>
+  <li>위 <code class="highlighter-rouge">Comparable</code> 인터페이스 예시에서는 <code class="highlighter-rouge">Student</code>클래스를 정렬할 때 <u>id 오름차순</u>으로 정렬하였다.<br />
+만약 위 정렬 순서가 아니라, 추가적으로 name 오름차순이나 id 내림차순, name 내림차순 등 다른 방법으로 정렬을 해보고자 한다면<br />
+<code class="highlighter-rouge">Comparator</code>를 이용하여 해결할 수 있다.</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+<span class="o">...</span>
+    <span class="c1">// name을 기준으로 오름차순 정렬하기</span>
+    <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">comparator</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;()</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="nc">Student</span> <span class="n">s1</span><span class="o">,</span> <span class="nc">Student</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">s1</span><span class="o">.</span><span class="na">getName</span><span class="o">().</span><span class="na">compareTo</span><span class="o">(</span><span class="n">s2</span><span class="o">.</span><span class="na">getName</span><span class="o">());</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">comparator</span><span class="o">);</span>   
+    <span class="c1">// 파라미터로는 정렬하고자 하는 리스트와 Comparator인터페이스를 넘기면 된다</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"=============================================="</span><span class="o">);</span>
+
+    <span class="c1">// id를 기준으로 내림차순 정렬하기</span>
+    <span class="nc">Collections</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="o">(</span><span class="n">s1</span><span class="o">,</span> <span class="n">s2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="n">s2</span><span class="o">.</span><span class="na">getId</span><span class="o">()</span> <span class="o">-</span> <span class="n">s1</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">list</span><span class="o">);</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<ul>
+  <li>결과</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[{</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">apple</span><span class="err">'</span><span class="o">},</span> <span class="o">{</span><span class="n">id</span><span class="o">=</span><span class="mi">3</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">banana</span><span class="err">'</span><span class="o">},</span> <span class="o">{</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">cherry</span><span class="err">'</span><span class="o">},</span> <span class="o">{</span><span class="n">id</span><span class="o">=</span><span class="mi">2</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">dragonFruit</span><span class="err">'</span><span class="o">}]</span>
+<span class="o">==============================================</span>
+<span class="o">[{</span><span class="n">id</span><span class="o">=</span><span class="mi">4</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">cherry</span><span class="err">'</span><span class="o">},</span> <span class="o">{</span><span class="n">id</span><span class="o">=</span><span class="mi">3</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">banana</span><span class="err">'</span><span class="o">},</span> <span class="o">{</span><span class="n">id</span><span class="o">=</span><span class="mi">2</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">dragonFruit</span><span class="err">'</span><span class="o">},</span> <span class="o">{</span><span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="o">,</span> <span class="n">name</span><span class="o">=</span><span class="err">'</span><span class="n">apple</span><span class="err">'</span><span class="o">}]</span>
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+<h2 id="정리">정리</h2>
+<hr />
+<p><del>쉽게 정리해보자면</del> 클래스를 정렬하고자 할 때,</p>
+<ul>
+  <li><code class="highlighter-rouge">Arrays.sort(T[] a)</code>, <code class="highlighter-rouge">Collections.sort(List&lt;T&gt; list)</code>를 쓰고 싶다면<br />
+<strong>클래스가 <code class="highlighter-rouge">Comparable</code> 인터페이스를 구현해야</strong> 한다.</li>
+  <li>아니면 <code class="highlighter-rouge">Arrays.sort(T[] a, Comparator&lt;? super T&gt; c)</code>,<br />
+<code class="highlighter-rouge">Collections.sort(List&lt;T&gt; list, Comparator&lt;? super T&gt; c)</code>에 <strong><code class="highlighter-rouge">Comparator</code> 인터페이스를 파라미터로 전달하면</strong> 된다.</li>
+</ul>
+
+<h2><br /><br /><br /><br /></h2>
+<h3 id="참고">참고</h3>
+<ul>
+  <li><a href="http://www.yes24.co.kr/24/goods/23449538">카이 호스트만의 코어 자바 8</a></li>
+</ul>
+:ET

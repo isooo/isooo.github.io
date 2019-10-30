@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "BigDecimal"
+title:  "[Java] BigDecimal"
 date:   2019-01-17
-categories: [JAVA]
+categories: [ETC]
 tags: [java, BigDecimal]
 ---
 

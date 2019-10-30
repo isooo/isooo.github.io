@@ -1,0 +1,46 @@
+I"�<ul>
+  <li>
+    <p>리눅스 파일명 검색</p>
+
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">find 찾을위치 -name "파일명"</code></p>
+
+        <p>ex) 확장자가 txt 인 파일을, 현재 폴더부터 하위폴더를 포함하여 찾아줘
+  <code class="highlighter-rouge">find ./ -name "*txt"</code></p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>find ./ <span class="nt">-name</span> <span class="s2">"*txt"</span>
+  ./test111.txt
+  ./test1120.txt
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>만약 전체 폴더에서 찾고 싶다면 <code class="highlighter-rouge">find / -name "파일명"</code> <br />
+<br /><br /></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>리눅스 <strong>파일</strong> 내부 문자열 검색</p>
+    <ul>
+      <li>
+        <p><code class="highlighter-rouge">grep -r "찾을문자열" 찾을위치</code></p>
+
+        <p>ex) 현재 폴더부터 하위 모든 폴더 내 파일에서 test 라는 문자열을 찾아줘
+      <code class="highlighter-rouge">grep -r "찾을문자열" ./*</code></p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> <span class="s2">"test"</span> ./<span class="k">*</span>
+  ./test111.txt:for <span class="nb">test</span>
+  ./test171120.txt:for <span class="nb">test </span>20171120 Mon
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p><code class="highlighter-rouge">-n</code> 옵션을 주면, 해당 문자열이 몇 번째 라인에 있는지도 출력할 수 있다</p>
+
+        <p>ex) 현재 폴더에 있는 test111.txt 에서 test라는 문자열이 몇 번째 라인에 있는지 찾아줘</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">grep</span> <span class="nt">-r</span> <span class="nt">-n</span> <span class="s2">"test"</span> ./test111.txt
+  1:for <span class="nb">test</span>
+</code></pre></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+:ET

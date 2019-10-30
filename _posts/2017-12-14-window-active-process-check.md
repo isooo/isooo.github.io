@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "window에서 동작중인 프로세스 확인"
-date:   2017-12-14 16:35:00 +0900
-categories: [OS]
-tags: [window,process,cmd]
+title:  "[OS] window에서 동작중인 프로세스 확인"
+date:   2017-12-14
+categories: [ETC]
+tags: [os, window, process, cmd]
 ---
 
 

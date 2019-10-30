@@ -1,0 +1,77 @@
+I"�<h1 id="disqus-기능-붙이기">disqus 기능 붙이기</h1>
+<p>블로그 템플릿에 댓글달기 기능이 붙어있었는데<br />
+연동을 시켜놓지 않아 <del>마치 모델하우스처럼</del> 텅 빈 기능으로 자리잡고 있었다<br />
+미루고 미루다 이제서야 기능을 붙여보았다<br />
+<br /><br /></p>
+
+<h2 id="to-do">TO-DO</h2>
+<ul>
+  <li>disqus를 이용하여 깃허브블로그에 소셜 댓글 서비스 기능 붙이기<br />
+<br /><br /></li>
+</ul>
+
+<h2 id="진행-순서">진행 순서</h2>
+<ol>
+  <li><a href="#ch1">disqus 가입하기</a></li>
+  <li><a href="#ch2">블로그에 적용하기</a><br />
+<br /></li>
+</ol>
+
+<p><a name="ch1"></a>
+<br /><br /></p>
+<h3 id="1-disqus-가입하기">1. disqus 가입하기</h3>
+<ul>
+  <li>
+    <p>가입 후 로그인 &gt; 우측 상단에 프로필 이미지 클릭 &gt; <code class="highlighter-rouge">Settings</code> &gt; 우측 상단에 톱니바퀴 클릭 &gt; <code class="highlighter-rouge">Add Disqus To Site</code></p>
+  </li>
+  <li>
+    <p>화면 아래 쪽에 <code class="highlighter-rouge">GET STARTED</code> &gt; <code class="highlighter-rouge">I want to install Disqus on my site</code> 클릭</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">Create a new site</code> 페이지가 나오면, <code class="highlighter-rouge">Website Name</code>에 원하는 정보로 입력하기</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">Select a plan</code> 에서는 <code class="highlighter-rouge">Basic</code>을 선택해주면 <del>과금되지 않는 무료서비스로 선택이</del> 된다 &gt; Subscribe now</p>
+  </li>
+  <li>여러 아이콘들이 나오는데, 어디서 코멘트 서비스를 이용할 건지 선택할 수 있는 부분!
+    <ul>
+      <li>나는 <code class="highlighter-rouge">Jekyll</code> 을 이용해서 블로그를 만들었기에 <code class="highlighter-rouge">Jekyll</code> 선택!</li>
+    </ul>
+  </li>
+  <li>disqus 메인페이지에서 우측 상단에 <code class="highlighter-rouge">Admin</code> 선택 &gt; 좌측 상단에 <code class="highlighter-rouge">Your Sites</code> 라는 부분에서 내가 방금 생성한 사이트 클릭 &gt; 좌측 메뉴 중 <code class="highlighter-rouge">General</code>을 클릭하여 <code class="highlighter-rouge">Website URL</code> 에 내가 적용하고자 하는 url을 입력
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Website URL   https://isooo.github.io
+</code></pre></div>    </div>
+    <p><a name="ch2"></a>
+<br /><br /></p>
+  </li>
+</ul>
+
+<h3 id="2-블로그에-적용하기">2. 블로그에 적용하기</h3>
+<ul>
+  <li><code class="highlighter-rouge">_layouts/blog.html</code> 에 다음과 같이 <code class="highlighter-rouge">comments: true</code> 를 입력
+    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ---
+    layout: default
+    comments: true
+    ---
+</code></pre></div>    </div>
+  </li>
+  <li><code class="highlighter-rouge">_includes/comments.html</code>에서 <code class="highlighter-rouge">s.src</code> 부분에, disqus url 을 넣어준다
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">s</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">https://isooo.disqus.com/embed.js</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="highlighter-rouge">_config.yml</code> 에서 disqus Website Name을 적어준다
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="na">disqus</span><span class="pi">:</span> <span class="s2">"</span><span class="s">isooo"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>이제 commit 하고 push!!<br />
+<br /><br /></li>
+</ul>
+
+<h2 id="참고자료">참고자료</h2>
+<ul>
+  <li><a href="https://devminjun.github.io/blog/addComments">Github Blog에 댓글(disqus) 기능 추가하기</a></li>
+  <li><a href="https://hanjungv.github.io/2017-02-03-2_ETC_AddDisqus/">지킬 블로그에 Disqus 추가하기</a></li>
+</ul>
+
+<p><br /></p>
+:ET

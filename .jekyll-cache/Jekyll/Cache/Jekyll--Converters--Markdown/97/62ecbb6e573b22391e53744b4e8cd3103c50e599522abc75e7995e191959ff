@@ -1,0 +1,33 @@
+I"<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="mf">2.0</span> <span class="o">-</span> <span class="mf">1.1</span><span class="o">);</span>
+</code></pre></div></div>
+<p>위 코드를 실행시킨 결과는 <code class="highlighter-rouge">0.8999999999999999</code>이다.<br />
+<small><em><del>아직 쪼무래기인 나는 당연히 <code class="highlighter-rouge">0.9</code>가 나올것이라 예상했…</del></em></small></p>
+
+<p>위와 같은 결과로 나오는 이유는<br />
+정확히 <code class="highlighter-rouge">0.9</code>라는 값을 이진법으로 나타낼 수 없고 근사치만 만들 수 있기 때문이다.<br />
+그렇다면 예상과 동일한 결과를 도출하기 위해서는 어떻게 해야할까?</p>
+
+<p><br /></p>
+<h1 id="bigdecimal">BigDecimal</h1>
+
+<p>자바에서는 <code class="highlighter-rouge">BigDecimal</code>이라는 클래스를 제공하고 있다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BigDecimal</span> <span class="n">b1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">"2.0"</span><span class="o">);</span>
+<span class="nc">BigDecimal</span> <span class="n">b2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigDecimal</span><span class="o">(</span><span class="s">"1.1"</span><span class="o">);</span>
+
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b1</span><span class="o">.</span><span class="na">subtract</span><span class="o">(</span><span class="n">b2</span><span class="o">));</span>
+<span class="c1">// 0.9</span>
+</code></pre></div></div>
+
+<p>위와 같은 방법으로<br />
+부동소수점에 대한 정확한 계산을 할 수 있다!!<br />
+위의 예시 외에도 다양한 함수가 존재한다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b1</span><span class="o">.</span><span class="na">min</span><span class="o">(</span><span class="n">b2</span><span class="o">));</span>     <span class="c1">// 1.1</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b1</span><span class="o">.</span><span class="na">max</span><span class="o">(</span><span class="n">b2</span><span class="o">));</span>     <span class="c1">// 2.0</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b1</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">b2</span><span class="o">,</span> <span class="nc">RoundingMode</span><span class="o">.</span><span class="na">FLOOR</span><span class="o">));</span>      <span class="c1">// 1.8</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b1</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">b2</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="nc">RoundingMode</span><span class="o">.</span><span class="na">FLOOR</span><span class="o">));</span>   <span class="c1">// 1.8181</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">b1</span><span class="o">.</span><span class="na">pow</span><span class="o">(</span><span class="mi">3</span><span class="o">));</span>      <span class="c1">// 8.000</span>
+
+</code></pre></div></div>
+:ET

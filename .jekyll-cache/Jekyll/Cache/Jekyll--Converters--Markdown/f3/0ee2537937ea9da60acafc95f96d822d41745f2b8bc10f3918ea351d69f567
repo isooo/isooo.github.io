@@ -1,0 +1,52 @@
+I"<h1 id="arraylist-vs-arraylist">ArrayList vs ArrayList</h1>
+
+<p><code class="highlighter-rouge">Arrays.asList()</code>를 사용하여 <code class="highlighter-rouge">ArrayList</code>를 생성하였을 때,<br />
+이는 <code class="highlighter-rouge">java.util.ArrayList</code>가 아닌 <code class="highlighter-rouge">java.util.Arrays.ArrayList</code>가 <code class="highlighter-rouge">return</code>된다.  <small><em><del>왜냐면 Java is just like that…?</del></em></small><br />
+<br /></p>
+
+<h2 id="차이점">차이점</h2>
+<ul>
+  <li><code class="highlighter-rouge">java.util.Arrays.ArrayList</code>에서 <code class="highlighter-rouge">add()</code>를 사용할 경우, <code class="highlighter-rouge">UnsupportedOperationException</code> 예외가 발생한다.<br />
+<code class="highlighter-rouge">java.util.Arrays.ArrayList</code>에는 <code class="highlighter-rouge">add()</code>가 없기 때문에, 부모클래스인 <code class="highlighter-rouge">AbstractList</code>에 구현된 <code class="highlighter-rouge">add()</code>가 실행된다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// AbstractList에 구현되어있는 add()</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">add</span><span class="o">(</span><span class="n">size</span><span class="o">(),</span> <span class="n">e</span><span class="o">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
+
+  <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">index</span><span class="o">,</span> <span class="no">E</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedOperationException</span><span class="o">();</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+  <li><code class="highlighter-rouge">java.util.ArrayList</code>는 해당 클래스 내에서 <code class="highlighter-rouge">add()</code>를 오버라이드하여, 일반적으로 사용하는 <strong>ArrayList에 요소추가하기</strong> 가 가능하다.
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// java.util.ArrayList에 구현되어있는 add()</span>
+  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">add</span><span class="o">(</span><span class="no">E</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+      <span class="n">ensureCapacityInternal</span><span class="o">(</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="o">);</span>  <span class="c1">// Increments modCount!!</span>
+      <span class="n">elementData</span><span class="o">[</span><span class="n">size</span><span class="o">++]</span> <span class="o">=</span> <span class="n">e</span><span class="o">;</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+    <p><br /><br /></p>
+  </li>
+</ul>
+
+<h2 id="-약간의-해결책">+ 약간의 해결책?..</h2>
+<p>만약 <code class="highlighter-rouge">asList()</code>를 이용하여 <code class="highlighter-rouge">ArrayList</code>를 생성하였을 때, <code class="highlighter-rouge">add()</code>를 사용하고자 한다면, 해당 객체를 <code class="highlighter-rouge">java.util.ArrayList</code>로 캐스팅해주면 된다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nc">String</span><span class="o">[]</span> <span class="n">strArr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">String</span><span class="o">[]{</span><span class="s">"apple"</span><span class="o">,</span> <span class="s">"banana"</span><span class="o">,</span> <span class="s">"cherry"</span><span class="o">};</span>
+  <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">strArr</span><span class="o">));</span>
+  <span class="n">arr</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"aaa"</span><span class="o">);</span>
+</code></pre></div></div>
+<p><br /><br /></p>
+
+<h3 id="-또다른-궁금증">++ 또다른 궁금증</h3>
+<p><code class="highlighter-rouge">AbstractList</code>가 <code class="highlighter-rouge">implements List</code>를 하고 있음에도 불구하고,<br />
+왜 <code class="highlighter-rouge">java.util.ArrayList</code>에서도 <code class="highlighter-rouge">implements List</code>하고 있을까?..<br />
+<small><em><del>이것도 왠지 Java is just like that…?</del></em></small></p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">AbstractCollection</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ArrayList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="nc">AbstractList</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;</span>
+  <span class="kd">implements</span> <span class="nc">List</span><span class="o">&lt;</span><span class="no">E</span><span class="o">&gt;,</span> <span class="nc">RandomAccess</span><span class="o">,</span> <span class="nc">Cloneable</span><span class="o">,</span> <span class="n">java</span><span class="o">.</span><span class="na">io</span><span class="o">.</span><span class="na">Serializable</span>
+</code></pre></div></div>
+:ET

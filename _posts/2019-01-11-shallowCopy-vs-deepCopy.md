@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Shallow Copy and Deep Copy "
+title:  "[Java] Shallow Copy and Deep Copy "
 date:   2019-01-11
-categories: [JAVA]
+categories: [ETC]
 tags: [java, 얕은복사, 깊은복사]
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "리눅스에서 파일 내 문자열 검색"
+title:  "[OS] 리눅스에서 파일 내 문자열 검색"
 date:   2018-01-14 16:35:00 +0900
-categories: [OS]
-tags: [linux,grep,find]
+categories: [ETC]
+tags: [os, linux,grep,find]
 ---
 
 * 리눅스 파일명 검색

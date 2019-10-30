@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "ArrayList vs ArrayList"
+title:  "[Java] ArrayList vs ArrayList"
 date:   2019-01-13
-categories: [JAVA]
+categories: [ETC]
 tags: [java, ArrayList, Arrays, asList]
 ---
 

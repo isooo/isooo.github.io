@@ -1,0 +1,46 @@
+I"�
+<p>반복해서 입력하는 명령어가 있는데, 귀찮아서 <code class="highlighter-rouge">alias</code>를 등록하지 않고 꿋꿋하게 <del>굳이</del> 하나하나 입력했었는데,<br />
+이제 더는 못 참겠어서 등록하기에 이르렀다<em><del>는 tmi</del></em> .</p>
+
+<ol>
+  <li>터미널 열기</li>
+  <li><code class="highlighter-rouge">vi ~/.bash_profile</code> 입력
+    <ul>
+      <li>혹 <code class="highlighter-rouge">zsh</code>을 기본으로 이용하고 있다면 <code class="highlighter-rouge">vi ~/.zsh_profile</code> 을 입력!</li>
+      <li>기본 쉘 확인 : <code class="highlighter-rouge">echo $SHELL</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">i</code> 를 눌러 입력 모드로 바꾼 후, 맨 아랫줄에 필요한 명령어를 다음과 같이 저장해두면 된다
+    <ul>
+      <li>e.g. <code class="highlighter-rouge">zsh</code>에서 <code class="highlighter-rouge">cd /Users/isoo/test</code>라는 명령어를 <code class="highlighter-rouge">cdtest</code>라는 <code class="highlighter-rouge">alias</code>를 걸고자 한다면
+        <ul>
+          <li><code class="highlighter-rouge">alias ="cd /Users/isoo/test"</code> 를 입력</li>
+        </ul>
+      </li>
+      <li>e.g. <code class="highlighter-rouge">bash</code>에서 <code class="highlighter-rouge">cd /Users/user</code>라는 명령어를 <code class="highlighter-rouge">cduser</code>에 걸고자 한다면
+        <ul>
+          <li><code class="highlighter-rouge">alias ='cd /Users/user'</code>를 입력
+            <blockquote>
+              <p><strong>주의할 점</strong></p>
+              <ul>
+                <li><code class="highlighter-rouge">=</code>과 <code class="highlighter-rouge">홑따옴표/쌍따옴표</code> 사이에 공백이 존재하면 안된다</li>
+                <li><code class="highlighter-rouge">bash</code> 쉘의 경우 <strong>홑따옴표</strong>, <code class="highlighter-rouge">zsh</code> 셀의 경우 <strong>쌍따옴표</strong>로 명령어를 감싸줘야 한다.</li>
+              </ul>
+            </blockquote>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>명령어 입력 후, <code class="highlighter-rouge">:wq</code>로 저장하고 빠져나오기</li>
+  <li>새로 입력한 내용 적용하기
+    <ul>
+      <li><code class="highlighter-rouge">source ~/.zsh_profile</code> (혹은 <code class="highlighter-rouge">source ~/.bash_profile</code>) 로 적용하거나, 터미널을 종료했다가 재실행하면 적용된 결과를 확인할 수 있다
+        <ul>
+          <li>e.g. <code class="highlighter-rouge">cdtest</code>를 입력하면, 설정해둔 명령어가 실행된다!</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+:ET

@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "맥에서 ssh로 리눅스 서버에 접속하기"
+title:  "[OS] 맥에서 ssh로 리눅스 서버에 접속하기"
 date:   2018-04-18
-categories: [OS]
-tags: [linux,ssh,putty]
+categories: [ETC]
+tags: [os, linux,ssh,putty]
 ---
 
 * 맥에서 터미널로 ssh 접속하기

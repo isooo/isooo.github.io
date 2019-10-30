@@ -1,0 +1,166 @@
+I"\O<h1 id="날짜-시간-표현하기">날짜, 시간 표현하기</h1>
+<p>java8 이전까지는 날짜와 시간을 표현할 때 <code class="highlighter-rouge">Calendar</code>나 <code class="highlighter-rouge">Date</code>를 사용하였다.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Date</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"현재 시각 : "</span> <span class="o">+</span> <span class="n">d</span><span class="o">);</span>         
+<span class="c1">// Sun Jan 20 21:05:37 KST 2019</span>
+
+
+<span class="nc">SimpleDateFormat</span> <span class="n">sdf</span> <span class="o">=</span>
+        <span class="k">new</span> <span class="nf">SimpleDateFormat</span><span class="o">(</span><span class="s">"yyyy.MM.dd HH:mm:ss"</span><span class="o">,</span> <span class="nc">Locale</span><span class="o">.</span><span class="na">KOREA</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">today</span> <span class="o">=</span> <span class="n">sdf</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">d</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"현재 시각2 : "</span> <span class="o">+</span> <span class="n">today</span><span class="o">);</span>    
+<span class="c1">// 2019.01.20 21:05:37</span>
+</code></pre></div></div>
+<p>하지만 위 API를 사용하기엔 불편한 부분이나 위험한 부분이 존재하였다.<br />
+<small><del><code class="highlighter-rouge">Calendar.JANUARY</code>가 0이라던가, 시간을 구하고자 하여 <code class="highlighter-rouge">getTime()</code>했더니 Date 타입이 반환된다던가, <code class="highlighter-rouge">set()</code>으로 수정이 가능해진다거나…</del></small><br />
+이리하여 <strong>java8</strong>부터 새로운 API가 제공되었다.</p>
+
+<p><br /><br /><br /></p>
+<h1 id="javatime-패키지">java.time 패키지</h1>
+<p><br /></p>
+
+<h3 id="localdate">LocalDate</h3>
+<ul>
+  <li><code class="highlighter-rouge">년, 월, 일</code>과 같이 <strong>날짜만 표현</strong> 하는 클래스</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LocalDate</span> <span class="n">ld</span> <span class="o">=</span> <span class="nc">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>   
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ld</span><span class="o">);</span>           <span class="c1">// 2019-01-20</span>
+
+<span class="nc">LocalDate</span> <span class="n">ld2</span> <span class="o">=</span> <span class="nc">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1919</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">19</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ld2</span><span class="o">);</span>          <span class="c1">// 1919-01-19</span>
+
+<span class="nc">LocalDate</span> <span class="n">ld3</span> <span class="o">=</span> <span class="nc">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">plusMonths</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ld3</span><span class="o">);</span>          <span class="c1">// 2019-06-20</span>
+
+<span class="nc">LocalDate</span> <span class="n">ld1</span> <span class="o">=</span> <span class="nc">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2018</span><span class="o">,</span> <span class="mo">05</span><span class="o">,</span> <span class="mo">07</span><span class="o">);</span>
+<span class="nc">LocalDate</span> <span class="n">ld2</span> <span class="o">=</span> <span class="nc">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="kt">long</span> <span class="n">history</span> <span class="o">=</span> <span class="n">ld2</span><span class="o">.</span><span class="na">toEpochDay</span><span class="o">()</span> <span class="o">-</span> <span class="n">ld1</span><span class="o">.</span><span class="na">toEpochDay</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">history</span><span class="o">);</span>      <span class="c1">// 258</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="localtime">LocalTime</h3>
+<ul>
+  <li><code class="highlighter-rouge">시, 분, 초</code>와 같이 <strong>시간만 표현</strong> 하는 클래스</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LocalTime</span> <span class="n">lt</span> <span class="o">=</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lt</span><span class="o">);</span>       <span class="c1">// 21:54:26.098</span>
+
+<span class="nc">LocalTime</span> <span class="n">lt2</span> <span class="o">=</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">22</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">59</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lt2</span><span class="o">);</span>      <span class="c1">// 22:10:59</span>
+
+<span class="nc">LocalTime</span> <span class="n">lt3</span> <span class="o">=</span> <span class="nc">LocalTime</span><span class="o">.</span><span class="na">now</span><span class="o">().</span><span class="na">minusMinutes</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lt3</span><span class="o">);</span>      <span class="c1">// 20:14:26.099</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="localdatetime">LocalDateTime</h3>
+<ul>
+  <li><code class="highlighter-rouge">년, 월, 일, 시, 분, 초</code>를 표현하는 클래스</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LocalDateTime</span> <span class="n">ldt</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldt</span><span class="o">);</span>    <span class="c1">// 2019-01-20T21:54:26.099</span>
+
+<span class="nc">LocalDateTime</span> <span class="n">ldt2</span> <span class="o">=</span>
+        <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                <span class="nc">LocalDate</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
+                        <span class="mi">1919</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="mi">19</span><span class="o">),</span>
+                <span class="nc">LocalTime</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">22</span><span class="o">,</span> <span class="mi">10</span><span class="o">,</span> <span class="mi">20</span><span class="o">)</span>
+        <span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldt2</span><span class="o">);</span>   <span class="c1">// 1919-01-19T22:10:20</span>
+
+<span class="nc">LocalDateTime</span> <span class="n">ldt3</span> <span class="o">=</span> <span class="nc">LocalDateTime</span>
+        <span class="o">.</span><span class="na">now</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">withMonth</span><span class="o">(</span><span class="mi">11</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">withDayOfMonth</span><span class="o">(</span><span class="mi">4</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldt3</span><span class="o">);</span>   <span class="c1">// 2019-11-04T21:54:26.100</span>
+
+<span class="nc">LocalDateTime</span> <span class="n">ldt4</span> <span class="o">=</span> <span class="nc">LocalDateTime</span>
+        <span class="o">.</span><span class="na">now</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">plusDays</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldt4</span><span class="o">.</span><span class="na">isAfter</span><span class="o">(</span><span class="n">ldt</span><span class="o">));</span>  <span class="c1">// true</span>
+
+
+
+
+<span class="nc">Date</span> <span class="n">d1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Date</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d1</span><span class="o">);</span>   <span class="c1">// Sun Jan 20 22:47:22 KST 2019</span>
+
+<span class="nc">LocalDateTime</span> <span class="n">ldt5</span> <span class="o">=</span> <span class="nc">LocalDateTime</span>
+        <span class="o">.</span><span class="na">ofInstant</span><span class="o">(</span>
+                <span class="n">d1</span><span class="o">.</span><span class="na">toInstant</span><span class="o">(),</span>
+                <span class="nc">ZoneId</span><span class="o">.</span><span class="na">systemDefault</span><span class="o">()</span>
+        <span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldt5</span><span class="o">);</span> <span class="c1">// 2019-01-20T22:47:22.320</span>
+
+<span class="nc">Date</span> <span class="n">d2</span> <span class="o">=</span> <span class="nc">Date</span><span class="o">.</span>
+        <span class="nf">from</span><span class="o">(</span>
+                <span class="n">ldt5</span>
+                        <span class="o">.</span><span class="na">atZone</span><span class="o">(</span>
+                                <span class="nc">ZoneId</span><span class="o">.</span><span class="na">systemDefault</span><span class="o">()</span>
+                        <span class="o">)</span>
+                        <span class="o">.</span><span class="na">toInstant</span><span class="o">()</span>
+        <span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d2</span><span class="o">);</span>   <span class="c1">// Sun Jan 20 22:47:22 KST 2019</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="period">Period</h3>
+<ul>
+  <li>두 날짜 사이의 차이를 <code class="highlighter-rouge">년, 월, 일</code>을 이용하여 표현</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Period</span><span class="o">.</span><span class="na">ofDays</span><span class="o">(</span><span class="mi">10</span><span class="o">));</span>      <span class="c1">// P10D =&gt; 10일 차이</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Period</span><span class="o">.</span><span class="na">ofYears</span><span class="o">(</span><span class="mi">5</span><span class="o">));</span>      <span class="c1">// P5Y =&gt; 5년 차이</span>
+
+<span class="nc">LocalDate</span> <span class="n">ld1</span> <span class="o">=</span> <span class="nc">LocalDate</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="nc">LocalDate</span> <span class="n">ld2</span> <span class="o">=</span> <span class="n">ld1</span><span class="o">.</span><span class="na">plusDays</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+<span class="nc">Period</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">ld1</span><span class="o">.</span><span class="na">until</span><span class="o">(</span><span class="n">ld2</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p1</span><span class="o">);</span>                    <span class="c1">// P5D =&gt; 5일차이</span>
+
+<span class="nc">Period</span> <span class="n">p2</span> <span class="o">=</span> <span class="nc">Period</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="n">ld1</span><span class="o">,</span> <span class="n">ld2</span><span class="o">);</span>     <span class="c1">// util()과는 달리 static 메소드</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p2</span><span class="o">);</span>                   <span class="c1">// P5D</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="duration">Duration</h3>
+<ul>
+  <li>두 시간 사이의 차이를 <code class="highlighter-rouge">일, 시, 분, 초</code>로 표현</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="nc">Duration</span><span class="o">.</span><span class="na">ofDays</span><span class="o">(</span><span class="mi">1</span><span class="o">));</span>       <span class="c1">// PT24H</span>
+
+<span class="nc">LocalDateTime</span> <span class="n">ldt1</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="nc">LocalDateTime</span> <span class="n">ldt2</span> <span class="o">=</span> <span class="n">ldt1</span><span class="o">.</span><span class="na">plusDays</span><span class="o">(</span><span class="mi">2</span><span class="o">);</span>
+<span class="nc">Duration</span> <span class="n">d1</span> <span class="o">=</span> <span class="nc">Duration</span><span class="o">.</span><span class="na">between</span><span class="o">(</span><span class="n">ldt1</span><span class="o">,</span> <span class="n">ldt2</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">d1</span><span class="o">);</span>                       <span class="c1">// PT48H</span>
+
+<span class="nc">LocalDateTime</span> <span class="n">ldt3</span> <span class="o">=</span> <span class="nc">LocalDate</span>
+        <span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">2018</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">7</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">atTime</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="mi">30</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">plus</span><span class="o">(</span><span class="nc">Duration</span><span class="o">.</span><span class="na">ofHours</span><span class="o">(</span><span class="mi">7</span><span class="o">));</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">ldt3</span><span class="o">);</span>                     <span class="c1">// 2018-05-07T17:30</span>
+</code></pre></div></div>
+<p><br /></p>
+
+<h3 id="format">format</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">LocalDateTime</span> <span class="n">ldt1</span> <span class="o">=</span> <span class="nc">LocalDateTime</span><span class="o">.</span><span class="na">now</span><span class="o">();</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"ldt1 : "</span> <span class="o">+</span> <span class="n">ldt1</span><span class="o">);</span>     <span class="c1">// 2019-01-20T22:28:20.729</span>
+
+<span class="nc">DateTimeFormatter</span> <span class="n">formatter</span> <span class="o">=</span> <span class="nc">DateTimeFormatter</span>
+        <span class="o">.</span><span class="na">ofPattern</span><span class="o">(</span><span class="s">"yyyy년 MM월 dd일"</span><span class="o">);</span>
+<span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">ldt1</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="n">formatter</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"str : "</span> <span class="o">+</span> <span class="n">str</span><span class="o">);</span>       <span class="c1">// 2019년 01월 20일</span>
+</code></pre></div></div>
+
+<h2><br /><br /><br /><br /></h2>
+<h3 id="참고">참고</h3>
+<ul>
+  <li><a href="https://jeong-pro.tistory.com/163">https://jeong-pro.tistory.com/163</a></li>
+  <li><a href="https://d2.naver.com/helloworld/645609">네이버D2 : Java의 날짜와 시간 API</a></li>
+  <li><a href="http://jekalmin.tistory.com/entry/%EC%9E%90%EB%B0%94-18-%EB%82%A0%EC%A7%9C-%EC%A0%95%EB%A6%AC">http://jekalmin.tistory.com/entry/%EC%9E%90%EB%B0%94-18-%EB%82%A0%EC%A7%9C-%EC%A0%95%EB%A6%AC</a></li>
+</ul>
+:ET

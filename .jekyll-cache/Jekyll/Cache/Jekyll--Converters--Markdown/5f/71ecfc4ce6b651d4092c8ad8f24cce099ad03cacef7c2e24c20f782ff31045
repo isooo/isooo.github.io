@@ -1,0 +1,171 @@
+I"=<h1 id="얕은-복사shallow-copy와-깊은-복사deep-copy">얕은 복사(Shallow Copy)와 깊은 복사(Deep Copy)</h1>
+
+<hr />
+
+<h2 id="예시">예시</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Collections</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Fruit</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">count</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Fruit</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getCount</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">count</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCount</span><span class="o">(</span><span class="kt">int</span> <span class="n">count</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">count</span> <span class="o">=</span> <span class="n">count</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="s">"Fruit{"</span> <span class="o">+</span>
+                <span class="s">"name='"</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="sc">'\''</span> <span class="o">+</span>
+                <span class="s">", count="</span> <span class="o">+</span> <span class="n">count</span> <span class="o">+</span>
+                <span class="sc">'}'</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CopyTest_Object</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Fruit</span><span class="o">&gt;</span> <span class="n">origin</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+    <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Fruit</span><span class="o">&gt;</span> <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">shallowCopy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">copy</span> <span class="o">=</span> <span class="n">origin</span><span class="o">;</span>
+        <span class="n">copy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"cherry"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+        <span class="nc">Fruit</span> <span class="n">f</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">setCount</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">deepCopy</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="n">origin</span><span class="o">);</span>
+        <span class="n">copy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"cherry"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+        <span class="nc">Fruit</span> <span class="n">f</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">setCount</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">printArr</span><span class="o">()</span> <span class="o">{</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"============= origin =============="</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">origin</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"origin ["</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"] : "</span> <span class="o">+</span> <span class="n">origin</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"\n============= copy =============="</span><span class="o">);</span>
+        <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">copy</span><span class="o">.</span><span class="na">size</span><span class="o">()</span> <span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"copy ["</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">"] : "</span> <span class="o">+</span> <span class="n">copy</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">origin</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"apple"</span><span class="o">,</span> <span class="mi">1</span><span class="o">));</span>
+        <span class="n">origin</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"banana"</span><span class="o">,</span> <span class="mi">2</span><span class="o">));</span>
+
+        <span class="c1">// operation</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><br /></p>
+<h2 id="1-얕은-복사">1. 얕은 복사</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shallowCopy</span><span class="o">();</span>
+<span class="n">printArr</span><span class="o">();</span>
+</code></pre></div></div>
+<p>결과 :</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>============= origin ==============
+origin [0] : Fruit{name='apple', count=1}
+origin [1] : Fruit{name='banana', count=100}
+origin [2] : Fruit{name='cherry', count=3}
+
+============= copy ==============
+copy [0] : Fruit{name='apple', count=1}
+copy [1] : Fruit{name='banana', count=100}
+copy [2] : Fruit{name='cherry', count=3}
+</code></pre></div></div>
+
+<p><br /></p>
+<h2 id="2-깊은-복사-일까요-아닙니다-진정한-깊은-복사는-3번에서-확인-">2. 깊은 복사 <small>(일까요? <strong>아닙니다! 진정한 깊은 복사는 3번에서 확인!</strong> )</small></h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">deepCopy</span><span class="o">();</span>
+<span class="n">printArr</span><span class="o">();</span>
+</code></pre></div></div>
+<p>결과 :</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>============= origin ==============
+origin [0] : Fruit{name='apple', count=1}
+origin [1] : Fruit{name='banana', count=100}
+
+============= copy ==============
+copy [0] : Fruit{name='apple', count=1}
+copy [1] : Fruit{name='banana', count=100}
+copy [2] : Fruit{name='cherry', count=3}
+</code></pre></div></div>
+<p>깊은 복사에서 기대했던 값은,<br />
+<code class="highlighter-rouge">copy</code>에서 1번째 인덱스의 count를 100으로 변경했을 때,<br />
+<code class="highlighter-rouge">origin</code>의 1번째 인엑스의 count는 영향을 받지 않는 것이었다.<br />
+하지만 위 결과에서는 <code class="highlighter-rouge">origin</code>도 영향을 받음.
+<del><em>이것은 진정한 깊은 복사라 할 수 없다</em></del></p>
+
+<p><br /></p>
+<h2 id="3-진정한-깊은-복사">3. <small>진정한</small> 깊은 복사</h2>
+
+<p>(먼저 Fruit 클래스에서 <strong>clone()</strong>을 오버라이드 해주었다.)</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Fruit</span> <span class="o">{</span>
+<span class="o">...</span>
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">Fruit</span> <span class="nf">clone</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">Fruit</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">name</span><span class="o">,</span> <span class="k">this</span><span class="o">.</span><span class="na">count</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>(이제 operation 부분)</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Fruit</span><span class="o">&gt;</span> <span class="n">deepCopy</span> <span class="o">=</span> <span class="n">origin</span><span class="o">.</span><span class="na">stream</span><span class="o">()</span>
+        <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">Fruit:</span><span class="o">:</span><span class="n">clone</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">())</span>
+<span class="o">;</span>
+
+<span class="n">deepCopy</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">Fruit</span><span class="o">(</span><span class="s">"cherry"</span><span class="o">,</span> <span class="mi">3</span><span class="o">));</span>
+<span class="nc">Fruit</span> <span class="n">f</span> <span class="o">=</span> <span class="n">deepCopy</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+<span class="n">f</span><span class="o">.</span><span class="na">setCount</span><span class="o">(</span><span class="mi">100</span><span class="o">);</span>
+
+<span class="n">printArr</span><span class="o">();</span>
+</code></pre></div></div>
+<p>결과 :</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>============= origin ==============
+origin [0] : Fruit{name='apple', count=1}
+origin [1] : Fruit{name='banana', count=2}
+
+============= deepCopy ==============
+deepCopy [0] : Fruit{name='apple', count=1}
+deepCopy [1] : Fruit{name='banana', count=100}
+deepCopy [2] : Fruit{name='cherry', count=3}
+</code></pre></div></div>
+<p>이제 <code class="highlighter-rouge">deepCopy</code>에서 1번째 인덱스에 대한 count값을 변경하여도<br />
+<code class="highlighter-rouge">origin</code>에는 영향을 미치지 않는다!</p>
+
+<p><br /></p>
+<h3 id="참고">참고</h3>
+<ul>
+  <li><a href="http://library1008.tistory.com/47">http://library1008.tistory.com/47</a></li>
+</ul>
+:ET
