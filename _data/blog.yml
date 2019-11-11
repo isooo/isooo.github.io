@@ -9,31 +9,14 @@
 # - name: Java
 #   href: /java/
 
-# - name: Javascript
-#   href: /javascript/
-
 #- name: HTML
 #  href: /html/
-
-# - name: Sql
-#   href: /sql/
-
-
-# - name: Os
-#   href: /os/
-
 
 #- name: Algorithm
 #  href: /algorithm/
 
-
 - name: Review
   href: /review/
 
-
 - name: Etc
   href: /etc/
-
-# Don't display donation page: change donation to off at file '_config.yml'
-#- name: Donate
-#  href: /donate/
