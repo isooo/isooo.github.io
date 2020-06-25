@@ -1,6 +1,16 @@
 # careers section data
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name:
+    detail: MUSINSA
+  desc:
+    detail: Search Development Team
+  date:
+    detail: Dec. 2019 - 
+  job:
+    detail: Software Engineer
+  icon: fa-circle
+
+- name:
     detail: LINE Financial Plus
   desc:
     detail: Server Dev Internship
@@ -19,7 +29,6 @@
   job:
     detail: Assistant Research Engineer
   icon: fa-circle-o
-
 
 - name:
     detail: Ajou Univ.
