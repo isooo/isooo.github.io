@@ -12,7 +12,7 @@ author:  # change following line to your infomation.
 #            Hub  # Be used at index page about me section.
   last_name:
 #            Git  # Be used at index page about me section.
-  avatar: /static/assets/img/landing/finn.png  # upload your avatar at directory and edit it.
+  avatar: https://cultofthepartyparrot.com/guests/hd/partyblob.gif  # upload your avatar at directory and edit it.
   github_username: isooo  # Leave blank if you don't have now
   linkedin_id: isooo
 #  midnightmarching@gmail.com # Leave blank if you don't have now
@@ -29,7 +29,7 @@ author:  # change following line to your infomation.
     - name: icon-database-alt2
     - name: fa-linux
 
-  desc: "호기심이 많습니다 :-) <br/> junior developer"
+  desc: "집이 제일 좋습니다. 맛있는 것도 좋습니다. <br/> 일단은 자바를 주로 사용해서 뭔갈 만들긴 하는데 갈 길이 구만 리입니다. <br/> 어떻게든 되겠쥬 :)"
 
 # comment
 disqus: "isooo"
