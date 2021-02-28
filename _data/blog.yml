@@ -15,8 +15,8 @@
 #- name: Algorithm
 #  href: /algorithm/
 
-- name: Review
-  href: /review/
+# - name: Review
+#   href: /review/
 
 - name: Etc
   href: /etc/
