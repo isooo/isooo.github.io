@@ -41,7 +41,7 @@ $(function(){
                                 <!-- <span class="text-muted"> -->
                                 <span class="post-time">
                                   <!-- <i class="fa fa-clock-o"></i>  -->
-                                  {{ post.date | date: "%Y.%m.%-d" }}</span>
+                                  {{ post.date | date: "%Y.%m.%d" }}</span>
                             </div>
                             <p>
                                 {{ post.content | strip_html | truncate:100 }}
