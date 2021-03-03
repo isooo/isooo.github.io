@@ -31,9 +31,28 @@ Query DSL을 이용하여 Elasticsearch에 질의하는 방법을 알아보자.
 <br/>
 
 ## Query DSL 주요 쿼리
-es에서 제공하는 검색 관련 기능은 Query DSL을 이용해 모두 활용할 수 있다.   
+Elasticsearch에서 제공하는 검색 관련 기능은 Query DSL을 이용해 모두 활용할 수 있다.   
 
-### 필드의 값이 null이거나, 필드 자체가 없는 문서 검색
+### **Match Query**(Full Text Query)
+
+
+### **Term Query**
+문자열 형태의 값을 검색하기 위해 Elasticsearch는 2가지 매핑 유형을 지원한다.
+- **text** 데이터 타입
+    - 필드에 데이터가 저장되기 전, 데이터가 분석되어 역색인 구조로 저장됨
+- **keyword** 데이터 타입
+    - 데이터가 분석되지 않고 그대로 필드에 저장됨
+
+Match Query(Full Text Query)는 쿼리를 수행하기 전, 먼저 분석기를 통해 키워드를 분석한 후 검색을 수행한다. 하지만 Term Query는 별도의 분석 작업을 수행하지 않고, 입력된 텍스트를 가진 문서를 찾는다.
+따라서 keyword 데이터 타입을 사용하는 필드를 검색하려면 Term Query를 사용해야 한다
+
+
+
+### **Bool Query**
+
+### **Exists Query**
+> 필드의 값이 null이거나, 필드 자체가 없는 문서 검색하고자 할 때  
+
 만약 `create_date`라는 필드의 값이 null이거나 `create_date`이라는 필드 자체가 없는 문서를 검색하고자 한다면 
 ```json
 POST 인덱스명/_search
@@ -46,6 +65,22 @@ POST 인덱스명/_search
           "field": "create_date"
         }
       }
+    }
+  }
+}
+```
+
+### **Count API**
+> 검색된 문서의 개수만 가져오고자 할 때
+
+`movieNm` 필드가 `나라`라는 값을 포함하고 있는 document의 개수를 알고자 한다면
+```json
+POST movie_search/_count
+
+{
+  "query" : {
+    "match" : {
+      "movieNm" : "나라"
     }
   }
 }
