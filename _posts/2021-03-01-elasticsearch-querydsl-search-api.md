@@ -32,3 +32,21 @@ Query DSL을 이용하여 Elasticsearch에 질의하는 방법을 알아보자.
 
 ## Query DSL 주요 쿼리
 es에서 제공하는 검색 관련 기능은 Query DSL을 이용해 모두 활용할 수 있다.   
+
+### 필드의 값이 null이거나, 필드 자체가 없는 문서 검색
+만약 `create_date`라는 필드의 값이 null이거나 `create_date`이라는 필드 자체가 없는 문서를 검색하고자 한다면 
+```json
+POST 인덱스명/_search
+
+{
+  "query": {
+    "bool": {
+      "must_not": {
+        "exists": {
+          "field": "create_date"
+        }
+      }
+    }
+  }
+}
+```
