@@ -85,3 +85,27 @@ POST movie_search/_count
   }
 }
 ```
+
+### 정렬
+> 전체 문서를 대상으로, 특정 기준으로 정렬하고자 할 때
+
+```json
+{
+  "sort": {
+    "name": {
+      "order": "desc"
+    }
+  }
+}
+```
+
+Object 구조에서도 사용 가능  
+```json
+{
+  "sort": {
+    "goods.id": {
+      "order": "desc"
+    }
+  }
+}
+```
