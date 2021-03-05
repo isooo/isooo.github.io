@@ -34,7 +34,20 @@ Query DSL을 이용하여 Elasticsearch에 질의하는 방법을 알아보자.
 Elasticsearch에서 제공하는 검색 관련 기능은 Query DSL을 이용해 모두 활용할 수 있다.   
 
 ### **Match Query**(Full Text Query)
+> 검색어가 분석돼야 할 경우 사용하는 쿼리.  
+> Match Query는 검색어를 형태소 분석을 통해 term으로 분리한 후, 이 term들을 이용해 검색 질의를 수행.  
 
+```json
+POST 인덱스명/_search
+
+{
+  "query": {
+    "match": {
+      "필드명": "검색어"
+    }
+  }
+}
+```
 
 ### **Term Query**
 문자열 형태의 값을 검색하기 위해 Elasticsearch는 2가지 매핑 유형을 지원한다.
@@ -50,6 +63,7 @@ Match Query(Full Text Query)는 쿼리를 수행하기 전, 먼저 분석기를 
 
 ### **Bool Query**
 
+
 ### **Exists Query**
 > 필드의 값이 null이거나, 필드 자체가 없는 문서 검색하고자 할 때  
 
@@ -62,7 +76,7 @@ POST 인덱스명/_search
     "bool": {
       "must_not": {
         "exists": {
-          "field": "create_date"
+          "field": "필드명"
         }
       }
     }
@@ -73,26 +87,25 @@ POST 인덱스명/_search
 ### **Count API**
 > 검색된 문서의 개수만 가져오고자 할 때
 
-`movieNm` 필드가 `나라`라는 값을 포함하고 있는 document의 개수를 알고자 한다면
 ```json
-POST movie_search/_count
+POST 인덱스명/_count
 
 {
   "query" : {
     "match" : {
-      "movieNm" : "나라"
+      "필드명" : "검색어"
     }
   }
 }
 ```
 
 ### 정렬
-> 전체 문서를 대상으로, 특정 기준으로 정렬하고자 할 때
+> 전체 문서를 대상으로, 특정 필드 기준으로 정렬하고자 할 때
 
 ```json
 {
   "sort": {
-    "name": {
+    "필드명": {
       "order": "desc"
     }
   }
@@ -103,7 +116,7 @@ Object 구조에서도 사용 가능
 ```json
 {
   "sort": {
-    "goods.id": {
+    "필드명.필드명": { // e.g. goods.id 
       "order": "desc"
     }
   }
