@@ -21,6 +21,7 @@ Elasticsearch에서 제공하는 검색 API는 기본적으로 질의(Query)를 
 두 가지 방법 중 `Request Body` 방식을 이용한 검색을 알아보자.  
 
 <br/>
+<br/>
 
 ## Request Body 검색
 Request Body 방식은 HTTP 요청 시 body에다 검색할 컬럼과 검색어를 **json 형태**로 전달하는 방식이다. 이 방식은 복잡한 옵션을 가진 검색 쿼리를 URI 방식에 비해 깔끔한 json 형태로 넘길 수 있다는 장점이 있다.  
@@ -29,13 +30,16 @@ Request Body 방식은 HTTP 요청 시 body에다 검색할 컬럼과 검색어�
 Query DSL을 이용하여 Elasticsearch에 질의하는 방법을 알아보자.    
 
 <br/>
+<br/>
 
 ## Query DSL 주요 쿼리
 Elasticsearch에서 제공하는 검색 관련 기능은 Query DSL을 이용해 모두 활용할 수 있다.   
 
+<br/>
+
 ### **Match Query**(Full Text Query)
-> 검색어가 분석돼야 할 경우 사용하는 쿼리.  
-> Match Query는 검색어를 형태소 분석을 통해 term으로 분리한 후, 이 term들을 이용해 검색 질의를 수행.  
+검색어가 분석돼야 할 경우 사용하는 쿼리.    
+`Match Query`는 검색어를 형태소 분석을 통해 term으로 분리한 후, 이 term들을 이용해 검색 질의를 수행.  
 
 ```json
 POST 인덱스명/_search
@@ -49,25 +53,90 @@ POST 인덱스명/_search
 }
 ```
 
+<br/>
+
 ### **Term Query**
-문자열 형태의 값을 검색하기 위해 Elasticsearch는 2가지 매핑 유형을 지원한다.
-- **text** 데이터 타입
-    - 필드에 데이터가 저장되기 전, 데이터가 분석되어 역색인 구조로 저장됨
-- **keyword** 데이터 타입
-    - 데이터가 분석되지 않고 그대로 필드에 저장됨
+분석없이 검색어 그대로를 해당 필드의 값으로 가진 document검색.   
 
-Match Query(Full Text Query)는 쿼리를 수행하기 전, 먼저 분석기를 통해 키워드를 분석한 후 검색을 수행한다. 하지만 Term Query는 별도의 분석 작업을 수행하지 않고, 입력된 텍스트를 가진 문서를 찾는다.
-따라서 keyword 데이터 타입을 사용하는 필드를 검색하려면 Term Query를 사용해야 한다
+```json
+POST 인덱스명/_search
 
+{
+  "query": {
+    "term": {
+      "필드": "검색어"
+    }
+  }
+}
+```
+  
+`Match Query`는 텍스트에 대해 **형태소 분석을 한 뒤 검색**을 수행하지만, `Term Query`는 **검색어를 하나의 term으로 처리**하기 때문에 **필드에 term이 정확히 존재해야** 검색된다. 따라서 영문의 경우 **대소문자가 다를 경우 검색되지 않으므로** 주의해야 한다.  
 
+<br/>
 
 ### **Bool Query**
+RDB에서는 `AND`나 `OR`로 묶은 여러 조건을 `WHERE`절에서 사용할 수 있다.  
+이처럼 es에서도 여러 쿼리를 조합해 검색을 수행할 수 있다. 이러한 유형의 쿼리는 `Compound Query`라 하는데, `Compound Query`를 구현하기 위해 es에서는 `Bool Query`를 제공한다.  
+`Bool Query`를 상위에 두고, 그 하위에 다른 Query들을 두는 구조로, 복잡한 조건의 쿼리문을 작성할 수 있다.  
+`Bool Query`는 주어진 쿼리와 논리적으로 일치하는 문서를 복합적으로 검색한다. 해당 Query를 사용해 여러 형태(AND, OR, NAND, FILTER)를 표현할 수 있다.   
+문법적으로 제공되는 속성은 `must`, `must_not`, `should`, `filter` 총 4가지다.  
 
+```json
+POST 필드명/_search
+
+{
+  "query": {
+    "bool": {
+      "must": [],       // AND 칼럼 = 조건
+      "must_not": [],   // AND 칼럼 != 조건
+      "should": [],     // OR 칼럼 = 조건
+      "filter": []      // 칼럼 IN (조건)
+    }
+  }
+}
+```
+
+<br/>  
+
+> 책 예시 인용
+> - `repGenreNm`에 `코미디`라는 키워드가 들어있으며 **&&** `repNationNm`에 `한국`이 포함되어 있으며 **&&** `typeNm`에는 `단편`을 포함하지 않는 문서를 검색    
+> 
+> ```json
+> POST movie_search/_search
+> 
+> {
+>   "query": {
+>     "bool": {
+>       "must": [
+>         {
+>           "term": {
+>             "repGenreNm": "코미디"
+>           }
+>         },
+>         {
+>           "match": {
+>             "repNationNm": "한국"
+>           }
+>         }
+>       ],
+>       "must_not": [
+>         {
+>           "match": {
+>             "typeNm": "단편"
+>           }
+>         }
+>       ]
+>     }
+>   }
+> }
+> ```
+
+<br/>
 
 ### **Exists Query**
-> 필드의 값이 null이거나, 필드 자체가 없는 문서 검색하고자 할 때  
+필드의 값이 null이거나, 필드 자체가 없는 문서 검색하고자 할 때.    
+> 만약 `create_date`라는 필드의 값이 null이거나 `create_date`이라는 필드 자체가 없는 문서를 검색하고자 한다면   
 
-만약 `create_date`라는 필드의 값이 null이거나 `create_date`이라는 필드 자체가 없는 문서를 검색하고자 한다면 
 ```json
 POST 인덱스명/_search
 
@@ -84,8 +153,10 @@ POST 인덱스명/_search
 }
 ```
 
+<br/>
+
 ### **Count API**
-> 검색된 문서의 개수만 가져오고자 할 때
+검색된 문서의 개수만 가져오고자 할 때.
 
 ```json
 POST 인덱스명/_count
@@ -99,8 +170,10 @@ POST 인덱스명/_count
 }
 ```
 
-### 정렬
-> 전체 문서를 대상으로, 특정 필드 기준으로 정렬하고자 할 때
+<br/>
+
+### **정렬**
+전체 문서를 대상으로, 특정 필드 기준으로 정렬하고자 할 때.  
 
 ```json
 {
@@ -112,7 +185,7 @@ POST 인덱스명/_count
 }
 ```
 
-Object 구조에서도 사용 가능  
+Object 구조에서도 사용 가능.    
 ```json
 {
   "sort": {
