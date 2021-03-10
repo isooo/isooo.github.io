@@ -36,3 +36,20 @@ SQL에서 `GROUP BY` 연산과 비슷한 기능을 Elasticsearch에서도 제공
         }
     }
     ```
+
+<br/>
+
+## 집계 구문의 구조
+기본적인 집계 구문의 구조를 알아보자.  
+```json
+"aggregation" : {
+    "집계그룹이름1" : {
+        "집계타입" : {
+            "body"
+        }
+        [,"meta" : { ["meta_data_body"] }]?
+        [,"aggregations" : { ["sub_aggregation"]+ }]?
+    }
+    [,"집계그룹이름2" : { ... }]*
+}
+```
