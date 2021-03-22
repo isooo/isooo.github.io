@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Elasticsearch] "aggregation"
+title:  "[Elasticsearch] aggregation"
 date:   2021-03-08
 categories: [ETC]
 tags: [Elasticsearch]
@@ -16,7 +16,6 @@ SQL에서 `GROUP BY` 연산과 비슷한 기능을 Elasticsearch에서도 제공
     ```sql
     SELECT SUM(ratings) FROM movie_review GROUP BY movie_no;
     ```
-
 - **Elasticsearch의 Query DSL로 집계하는 쿼리**  
     ```json
     {
@@ -57,7 +56,7 @@ SQL에서 `GROUP BY` 연산과 비슷한 기능을 Elasticsearch에서도 제공
 <br/>
 
 ## 집계 영역(Aggregation Scope)
-앞서 다룬 [예제]()에서는 집계와 함께 질의(query)를 사용했다. 집계와 질의를 함께 수행하면 질의의 결과 영역 안에서 집계가 수행된다. 즉, 질의를 통해 반환된 문서들에 한해서 집계를 수행한다.    
+포스팅 처음에 등장한 예시에선 집계와 함께 질의(query)를 사용했다. 집계와 질의를 함께 수행하면 질의의 결과 영역 안에서 집계가 수행된다. 즉, 질의를 통해 반환된 문서들에 한해서 집계를 수행한다.    
 
 아래는 예시 쿼리다.  
 ```json
@@ -84,3 +83,20 @@ SQL에서 `GROUP BY` 연산과 비슷한 기능을 Elasticsearch에서도 제공
 - **2: aggs**
     - 질의를 통해 반환받은 문서들의 집한 내에서 집계를 수행한다.  
 
+<br/>
+
+## 전체 데이터 대상으로 집계해보기
+아래는 `movie_nm` 필드를 기준으로 집계한 예다. 
+```json
+POST 인덱스명/_search
+
+{
+    "aggs" : {
+        "movie_names" : {
+            "terms" : {
+                "field" : "movie_nm"
+            }
+        }
+    }
+}
+```
